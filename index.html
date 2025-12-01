@@ -95,6 +95,18 @@
     /* Parallax */
     .parallax{height:220px;border-radius:14px;background-image:url('https://picsum.photos/seed/parallax/1600/900');background-size:cover;background-position:center;margin:26px 0;box-shadow:var(--shadow)}
 
+    /* Pricing */
+    .pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:12px}
+    .price-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px;text-align:center}
+    .price-card h4{margin-bottom:8px}
+    .price-amount{font-size:20px;font-weight:700;color:var(--blue);margin:8px 0}
+    .price-list{text-align:left;margin-top:8px}
+    .price-cta{margin-top:12px}
+
+    /* About */
+    .about-box{background:var(--glass);padding:18px;border-radius:12px;margin-top:18px;box-shadow:var(--shadow);display:flex;gap:16px;align-items:center}
+    .about-box img{width:160px;height:160px;object-fit:cover;border-radius:12px}
+
     /* Contact */
     .contact-box{background:var(--glass);padding:16px;border-radius:14px;box-shadow:var(--shadow);margin-top:18px}
     .input{width:100%;padding:10px;border-radius:10px;border:none;margin-bottom:10px;background:rgba(255,255,255,0.03);color:var(--text);resize:vertical}
@@ -119,6 +131,7 @@
       .hero-anim{width:100%;height:240px}
       .project-anim{height:160px}
       .feature-page{grid-template-columns:1fr}
+      .about-box{flex-direction:column;align-items:flex-start}
     }
 
     footer{margin:40px 0 120px;text-align:center;color:rgba(255,255,255,0.5)}
@@ -140,6 +153,7 @@
       <div class="nav-links" aria-hidden="false">
         <a href="#projects">Projects</a>
         <a href="#services">Layanan</a>
+        <a href="#pricing">Harga</a>
         <a href="#contact">Kontak</a>
         <a href="#about">Tentang</a>
       </div>
@@ -359,6 +373,81 @@
       </div>
     </section>
 
+    <!-- Pricing section -->
+    <h2 class="section-title" id="pricing">Harga Paket / Layanan</h2>
+    <p>Tambahkan paket yang jelas supaya klien langsung tahu harus pilih apa. (Harga contoh, bisa disesuaikan.)</p>
+    <section class="feature-page" aria-labelledby="pricing">
+      <div>
+        <div class="pricing-grid">
+          <div class="price-card service-card" tabindex="0" role="button"
+               data-title="Paket Basic"
+               data-desc="Landing page sederhana — satu halaman responsif, optimasi performa dasar, dan kontak form."
+               data-img="https://picsum.photos/id/250/900/600"
+               data-price="Rp 250.000">
+            <h4>Paket Basic</h4>
+            <div class="price-amount">Rp 250.000</div>
+            <div class="price-list">
+              <ul>
+                <li>1 halaman landing</li>
+                <li>Responsive</li>
+                <li>Form kontak</li>
+              </ul>
+            </div>
+            <div class="price-cta"><button class="btn">Pilih Paket</button></div>
+          </div>
+
+          <div class="price-card service-card" tabindex="0" role="button"
+               data-title="Paket Standard"
+               data-desc="Website 3–5 halaman: homepage, about, layanan, kontak — optimasi SEO dasar & integrasi analytics."
+               data-img="https://picsum.photos/id/251/900/600"
+               data-price="Rp 500.000">
+            <h4>Paket Standard</h4>
+            <div class="price-amount">Rp 500.000</div>
+            <div class="price-list">
+              <ul>
+                <li>3–5 halaman</li>
+                <li>SEO dasar</li>
+                <li>Form & analytics</li>
+              </ul>
+            </div>
+            <div class="price-cta"><button class="btn">Pilih Paket</button></div>
+          </div>
+
+          <div class="price-card service-card" tabindex="0" role="button"
+               data-title="Paket Premium"
+               data-desc="Website bisnis lengkap + admin panel, integrasi payment & fitur khusus. Cocok untuk usaha menengah."
+               data-img="https://picsum.photos/id/252/900/600"
+               data-price="Rp 1.000.000">
+            <h4>Paket Premium</h4>
+            <div class="price-amount">Rp 1.000.000</div>
+            <div class="price-list">
+              <ul>
+                <li>Website lengkap</li>
+                <li>Admin panel</li>
+                <li>Integrasi pembayaran</li>
+              </ul>
+            </div>
+            <div class="price-cta"><button class="btn">Pilih Paket</button></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <img src="https://picsum.photos/id/253/1200/800" alt="Pricing preview" />
+      </div>
+    </section>
+
+    <!-- About -->
+    <h2 class="section-title" id="about">Tentang Saya</h2>
+    <section class="about-box" id="about-box">
+      <img src="https://picsum.photos/seed/habib/400/400" alt="Foto Abdulhabib" />
+      <div>
+        <h3>Abdulhabib — Web Engineer</h3>
+        <p>About Me: Saya suka membangun website modern dan cepat. Fokus saya adalah UI, animasi, dan pengalaman pengguna yang nyaman. Saya terbiasa mengerjakan project landing page, sistem sederhana, dan aplikasi berbasis web.</p>
+        <p>Jika Anda membutuhkan website yang cepat, responsif, dan mudah dikelola — saya siap membantu. Untuk diskusi teknis atau permintaan penawaran, silakan kontak lewat email atau WhatsApp.</p>
+        <div style="margin-top:10px"><a href="mailto:habib08081999@gmail.com" class="btn">Email Saya</a></div>
+      </div>
+    </section>
+
     <!-- Contact -->
     <div class="contact-box" id="contact">
       <h2 id="contact-title">Kontak</h2>
@@ -492,6 +581,7 @@
         else if(modalImg){ modalImg.style.display='none'; }
         modalTitle.textContent = data.title || '';
         modalDesc.textContent = data.desc || '';
+        // pricing cards may not have demo/repo
         modalDemo.href = data.demo || '#';
         modalRepo.href = data.repo || '#';
         modal.classList.add('show');
@@ -509,9 +599,9 @@
       qAll('.service-card, .project-card').forEach(card=>{
         card.addEventListener('click', (e)=>{
           const data = {
-            title: card.dataset.title || card.dataset.service || card.querySelector('h3')?.textContent || '',
+            title: card.dataset.title || card.dataset.service || card.querySelector('h3')?.textContent || card.querySelector('h4')?.textContent || '',
             desc: card.dataset.desc || card.querySelector('p')?.textContent || 'Deskripsi belum tersedia.',
-            img: card.dataset.img || card.dataset.img || card.querySelector('img')?.src || card.querySelector('.project-anim')?.style.backgroundImage?.slice(5,-2) || '',
+            img: card.dataset.img || card.querySelector('img')?.src || card.querySelector('.project-anim')?.style.backgroundImage?.slice(5,-2) || '',
             demo: card.dataset.demo || '#',
             repo: card.dataset.repo || '#'
           };
@@ -538,12 +628,11 @@
             el.scrollIntoView({behavior:'smooth', block:'start'});
             gsap && gsap.fromTo(el, {opacity:0, y:20}, {opacity:1, y:0, duration:0.6});
           } else {
-            // if no section, open modal with brief info
+            // fallback: open modal with brief info
             const data = { title: f, desc: `Informasi singkat tentang layanan ${f}.`, img: '' };
             const modalEl = q('#modal');
             if(modalEl) modalEl.querySelector ? modalEl.querySelector('.modal-close').click() : null;
-            // reuse modal opening
-            setTimeout(()=>{ document.querySelectorAll('.service-card')[0]?.click(); }, 80);
+            setTimeout(()=>{ openModal(data); }, 80);
           }
         });
       });
@@ -720,6 +809,7 @@
 
 </body>
 </html>
+
 
 
 
