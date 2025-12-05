@@ -112,7 +112,7 @@
     }
     .feature-chip:hover { border-color: var(--blue); color: var(--blue); transform: translateY(-2px); }
 
-    /* Hero Anim */
+    /* HERO ANIM */
     .hero-anim{
       width:340px;height:340px; border-radius:30px; overflow:hidden; flex-shrink:0; position:relative;
       background: #000; box-shadow: 0 20px 50px rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1);
@@ -190,10 +190,10 @@
     .price-list li::before { content: '✓'; color: var(--blue); }
     
     /* About & Contact */
-    .about-box{background:var(--glass);padding:30px;border-radius:24px;margin-top:24px;display:flex;gap:30px;align-items:center; border: 1px solid rgba(255,255,255,0.05);}
+    .about-box{background:var(--glass);padding:30px;border-radius:24px;margin-top:24px;display:flex;gap:30px;align-items:center; border: 1px solid rgba(255,255,255,0.05);}    
     .about-box img{width:140px;height:140px;object-fit:cover;border-radius:50%; border: 3px solid var(--blue);}
     
-    .contact-box{background:var(--glass);padding:30px;border-radius:24px;margin-top:24px; border: 1px solid rgba(255,255,255,0.05);}
+    .contact-box{background:var(--glass);padding:30px;border-radius:24px;margin-top:24px; border: 1px solid rgba(255,255,255,0.05);}    
     .input{width:100%;padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.1);margin-bottom:14px;background:rgba(0,0,0,0.2);color:#fff; outline:none; transition:0.3s}
     .input:focus { border-color: var(--blue); background: rgba(0,0,0,0.4); }
 
@@ -206,7 +206,7 @@
     /* Modal */
     .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.8);backdrop-filter: blur(8px); z-index:10000;padding:20px; opacity: 0; transition: opacity 0.3s ease;}
     .modal.show{display:flex; opacity: 1;}
-    .modal-card{background:#161b22;padding:24px;border-radius:20px;max-width:900px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.8);display:grid;grid-template-columns:1fr 340px;gap:24px; border: 1px solid rgba(255,255,255,0.1);}
+    .modal-card{background:#161b22;padding:24px;border-radius:20px;max-width:900px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.8);display:grid;grid-template-columns:1fr 340px;gap:24px; border: 1px solid rgba(255,255,255,0.1);}    
     .modal-card img{width:100%;height:300px;object-fit:cover;border-radius:12px}
     .modal-close{background:transparent;border:0;color:var(--text);font-size:24px;cursor:pointer; float: right;}
 
@@ -290,7 +290,9 @@
 
       <article class="project-card" 
                data-title="Sistem Akademik Modern"
-               data-desc="Dashboard realtime (PHP + MySQL). Fitur login, role-based, live update nilai dan jadwal."
+               data-desc="Dashboard realtime (PHP + MySQL). Fitur: login, role-based access, input nilai cepat, manajemen jadwal, notifikasi, export CSV, responsif, dan integrasi API SIS.
+
+Fitur Utama:\n- Otentikasi & role-based\n- Dashboard nilai realtime\n- Manajemen jadwal dan presensi\n- Export/Import CSV\n- Pemberitahuan via email"
                data-img="https://picsum.photos/id/1015/1200/800"
                data-demo="https://demo.sistem-akademik.com" data-repo="#">
         <div class="project-anim"></div>
@@ -300,7 +302,9 @@
 
       <article class="project-card"
                data-title="Smart Notes PWA"
-               data-desc="Aplikasi pencatat offline-first. Menggunakan service worker untuk caching, IndexedDB untuk penyimpanan lokal, dan sinkronisasi otomatis saat online kembali."
+               data-desc="Aplikasi pencatat offline-first. Fitur: service worker, sinkronisasi otomatis, encryption local, tag & search, drag-n-drop, dan export PDF/MD.
+
+Fitur Utama:\n- Offline-first dengan Service Worker\n- IndexedDB untuk penyimpanan lokal\n- Sinkronisasi background saat online\n- Tagging & pencarian cepat\n- Ekspor PDF / Markdown"
                data-img="https://picsum.photos/id/1006/1200/800"
                data-demo="https://demo.smart-notes.app" data-repo="#">
         <div class="project-anim" style="animation-duration: 4s; filter: hue-rotate(45deg);"></div>
@@ -310,7 +314,9 @@
 
       <article class="project-card"
                data-title="E-Commerce Lite"
-               data-desc="Platform jual beli ringan dengan integrasi payment gateway Midtrans. Fokus pada performa cepat dan UI/UX yang bersih."
+               data-desc="Platform jual beli ringan. Fitur: katalog cepat, checkout 1 halaman, integrasi Midtrans, admin panel, optimasi gambar, caching, dan versi mobile-friendly.
+
+Fitur Utama:\n- Integrasi payment gateway Midtrans\n- Checkout cepat satu halaman\n- Panel admin untuk order & produk\n- Optimasi gambar & caching\n- SEO dasar"
                data-img="https://picsum.photos/id/1072/1200/800"
                data-demo="https://demo.ecommerce-lite.com" data-repo="#">
         <div class="project-anim" style="animation-duration: 8s; filter: hue-rotate(90deg);"></div>
@@ -320,7 +326,9 @@
       
        <article class="project-card"
                data-title="AI Generator UI"
-               data-desc="Antarmuka untuk generate image menggunakan API Stable Diffusion. Desain futuristik dengan efek glassmorphism."
+               data-desc="Antarmuka untuk generate image menggunakan API Stable Diffusion. Fitur: preview, prompt presets, history, download berbagai ukuran, dan queue management.
+
+Fitur Utama:\n- Integrasi API Stable Diffusion\n- Preset prompt & pengaturan resolusi\n- Riwayat hasil & undo\n- Download multi-size"
                data-img="https://picsum.photos/id/1024/1200/800"
                data-demo="https://demo.ai-image.io" data-repo="#">
         <div class="project-anim" style="animation-duration: 5s; filter: hue-rotate(180deg);"></div>
@@ -330,7 +338,9 @@
 
       <article class="project-card"
                data-title="Landing Page Produk Baru"
-               data-desc="Contoh landing page responsif satu halaman untuk peluncuran produk baru. Fokus pada konversi dan kecepatan loading yang tinggi."
+               data-desc="Contoh landing page responsif satu halaman. Fitur: A/B hero, form konversi, animasi ringan, dan integrasi analytics.
+
+Fitur Utama:\n- Section hero alternatif A/B\n- Form konversi dengan validasi\n- Kecepatan loading optimal\n- Analytics event"
                data-img="https://picsum.photos/seed/landingpage1/1200/800"
                data-demo="https://demo.landingpage-basic.com" data-repo="#">
         <div class="project-anim" style="animation-duration: 6s; filter: hue-rotate(270deg);"></div>
@@ -340,7 +350,9 @@
 
       <article class="project-card"
                data-title="Website Profil Perusahaan"
-               data-desc="Website statis 3 halaman (Home, About, Contact) untuk profil bisnis kecil. Desain minimalis dan profesional."
+               data-desc="Website statis 3 halaman. Fitur: CMS ringan, optimasi SEO, metadata social, dan optimasi performa untuk hosting statis.
+
+Fitur Utama:\n- CMS ringan untuk update konten\n- Metadata OpenGraph & SEO\n- Halaman About & Contact siap pakai\n- Optimasi gambar & preload"
                data-img="https://picsum.photos/seed/companyprofile/1200/800"
                data-demo="https://demo.company-profile.com" data-repo="#">
         <div class="project-anim" style="animation-duration: 7s; filter: hue-rotate(30deg);"></div>
@@ -350,7 +362,9 @@
 
       <article class="project-card"
                data-title="Formulir Pendaftaran Interaktif"
-               data-desc="Implementasi formulir pendaftaran multipage interaktif dengan validasi realtime menggunakan Vanilla JS."
+               data-desc="Formulir multipage interaktif dengan validasi realtime. Fitur: autosave, step progress, validasi server-side, dan aksesibilitas.
+
+Fitur Utama:\n- Multi-step dengan autosave\n- Validasi realtime & server-side\n- Progress indicator\n- Aksesibilitas WCAG basic"
                data-img="https://picsum.photos/seed/formvalidation/1200/800"
                data-demo="https://demo.form-interaktif.com" data-repo="#">
         <div class="project-anim" style="animation-duration: 3s; filter: hue-rotate(120deg);"></div>
@@ -360,7 +374,9 @@
 
       <article class="project-card"
                data-title="Mini Galeri Foto Grid"
-               data-desc="Galeri foto responsif yang menampilkan gambar dalam tata letak grid, dengan efek hover dan lightbox sederhana."
+               data-desc="Galeri foto responsif dengan lightbox. Fitur: lazy-load, filter by tag, fullscreen preview, dan opsi download.
+
+Fitur Utama:\n- Lazy-loading gambar\n- Filter tag & kategori\n- Lightbox fullscreen\n- Download & share"
                data-img="https://picsum.photos/seed/photogallery/1200/800"
                data-demo="https://demo.mini-gallery.com" data-repo="#">
         <div class="project-anim" style="animation-duration: 5.5s; filter: hue-rotate(220deg);"></div>
@@ -368,7 +384,56 @@
         <p>Responsive Image Grid</p>
       </article>
 
-      </div>
+      <!-- Tambahan project agar minimal 10 -->
+      <article class="project-card"
+               data-title="Chat Support Bot"
+               data-desc="Sistem chat support otomatis untuk website. Fitur: autoresponder, FAQ dynamic, integrasi WhatsApp, dan queue handling.
+
+Fitur Utama:\n- Autoresponder cerdas\n- Routing chat ke agent\n- Integrasi WhatsApp API\n- Statistik percakapan"
+               data-img="https://picsum.photos/id/1011/1200/800"
+               data-demo="#" data-repo="#">
+        <div class="project-anim" style="animation-duration: 4.2s; filter: hue-rotate(10deg);"></div>
+        <h3>Chat Support Bot</h3>
+        <p>Customer Support Automation</p>
+      </article>
+
+      <article class="project-card"
+               data-title="Dashboard Analytics"
+               data-desc="Dashboard metrik untuk bisnis. Fitur: visualisasi realtime, custom widgets, role-based, export CSV, dan integrasi event tracking.
+
+Fitur Utama:\n- Visualisasi time-series\n- Custom widget & filter\n- Role-based views\n- Export data"
+               data-img="https://picsum.photos/id/1003/1200/800"
+               data-demo="#" data-repo="#">
+        <div class="project-anim" style="animation-duration: 3.8s; filter: hue-rotate(200deg);"></div>
+        <h3>Dashboard Analytics</h3>
+        <p>Insight & Metrics</p>
+      </article>
+
+      <article class="project-card"
+               data-title="Marketplace Vendor"
+               data-desc="Marketplace multi-vendor sederhana. Fitur: dashboard vendor, order management, rating, dan komisi otomatis.
+
+Fitur Utama:\n- Dashboard vendor terpisah\n- Manajemen order & pengiriman\n- Sistem rating & review\n- Pengaturan komisi otomatis"
+               data-img="https://picsum.photos/id/1005/1200/800"
+               data-demo="#" data-repo="#">
+        <div class="project-anim" style="animation-duration: 6s; filter: hue-rotate(60deg);"></div>
+        <h3>Marketplace Vendor</h3>
+        <p>Multi-vendor E-Commerce</p>
+      </article>
+
+      <article class="project-card"
+               data-title="Appointment Scheduler"
+               data-desc="Sistem jadwal janji temu online. Fitur: integrasi kalender, reminder email/SMS, slot management, dan payment for booking.
+
+Fitur Utama:\n- Integrasi Google Calendar\n- Reminder otomatis (email/SMS)\n- Manajemen slot dan buffer time\n- Pembayaran untuk reservasi"
+               data-img="https://picsum.photos/id/1020/1200/800"
+               data-demo="#" data-repo="#">
+        <div class="project-anim" style="animation-duration: 4.6s; filter: hue-rotate(140deg);"></div>
+        <h3>Appointment Scheduler</h3>
+        <p>Booking & Scheduling</p>
+      </article>
+
+    </div>
 
     <h2 class="section-title" id="services">Layanan & Keahlian</h2>
 
@@ -657,7 +722,8 @@
     }
   </script>
 </body>
-</html> 
+</html>
+
 
 
 
