@@ -1,4 +1,4 @@
-<!-- Versi Profesional Premium Agency — Full Rebuild -->
+<!-- Versi Premium Agency – Struktur Baru, UI Lebih Rapi & Profesional -->
 <!doctype html>
 <html lang="id">
 <head>
@@ -6,228 +6,211 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Abdulhabib — Premium Digital Agency</title>
 
-  <meta name="description" content="Website portfolio premium bergaya agency — modern, clean, animated, dan high performance." />
-  <meta name="theme-color" content="#0ea5e9" />
+  <meta name="description" content="Portfolio premium Abdulhabib — Full‑Stack Web Engineer & Creative Digital Builder." />
+  <meta name="theme-color" content="#00c7ff">
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#020617;
-      --fg:#e2e8f0;
-      --sub:#94a3b8;
-      --primary:#0ea5e9;
-      --card:#0f172a;
+      --bg:#0a0e14;
+      --glass:rgba(255,255,255,0.03);
+      --glass-border:rgba(255,255,255,0.08);
+      --text:#eaf3ff;
+      --blue:#00c7ff;
+      --purple:#bf00ff;
       --radius:22px;
     }
+    *{margin:0;padding:0;box-sizing:border-box;font-family:"Poppins",sans-serif}
 
-    *{margin:0;padding:0;box-sizing:border-box;font-family:"Inter",sans-serif;}
-    body{background:var(--bg);color:var(--fg);overflow-x:hidden;}
+    body{
+      background:var(--bg);
+      color:var(--text);
+      overflow-x:hidden;
+      background-image:radial-gradient(circle at top right,rgba(0,199,255,0.12),transparent 50%),radial-gradient(circle at bottom left,rgba(191,0,255,0.12),transparent 50%);
+    }
 
-    /* NAV */
     nav{
-      position:fixed;top:0;left:0;width:100%;height:80px;
-      display:flex;justify-content:space-between;align-items:center;
-      padding:0 40px;background:rgba(2,6,23,0.8);backdrop-filter:blur(14px);
+      position:fixed;top:0;left:0;width:100%;height:78px;padding:0 32px;
+      display:flex;align-items:center;justify-content:space-between;
+      backdrop-filter:blur(16px);
+      background:rgba(10,14,20,0.75);
       border-bottom:1px solid rgba(255,255,255,0.05);
-      z-index:1000;
+      z-index:800;
     }
-    nav h2{font-size:24px;font-weight:800;color:var(--primary);}
-    nav ul{display:flex;gap:22px;list-style:none;}
-    nav ul li a{color:var(--sub);text-decoration:none;font-size:15px;font-weight:500;transition:0.3s;}
-    nav ul li a:hover{color:var(--fg);}    
-
-    .btn-primary{
-      padding:12px 22px;border-radius:14px;background:var(--primary);
-      color:#000;font-weight:600;border:none;text-decoration:none;
-      transition:0.3s;
+    nav h2{font-size:22px;font-weight:700;color:var(--blue)}
+    .nav-links a{
+      color:rgba(255,255,255,0.75);
+      text-decoration:none;margin-left:18px;font-size:15px;
+      transition:.25s;
     }
-    .btn-primary:hover{transform:translateY(-3px);}
+    .nav-links a:hover{color:var(--blue)}
 
     /* HERO */
-    header{
-      padding-top:160px;padding-bottom:120px;text-align:center;
-      max-width:900px;margin:auto;
+    .hero{
+      max-width:1300px;margin:140px auto 80px;padding:20px;
+      display:grid;grid-template-columns:1.2fr 1fr;gap:56px;
+      align-items:center;
     }
-    header h1{
-      font-size:46px;font-weight:800;line-height:1.2;
-      background:linear-gradient(90deg,#fff,#0ea5e9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    .hero h1{font-size:42px;line-height:1.25;margin-bottom:18px;background:-webkit-linear-gradient(0deg,#fff,#ccc);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .hero p{font-size:16px;opacity:.8;margin-bottom:26px}
+    .btn{
+      background:var(--blue);padding:14px 26px;color:#000;font-weight:700;
+      border-radius:12px;text-decoration:none;display:inline-block;transition:.3s;
     }
-    header p{margin-top:18px;color:var(--sub);font-size:18px;line-height:1.6;}
-    header .cta{margin-top:32px;display:flex;justify-content:center;gap:14px;}
+    .btn:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,199,255,0.35)}
+    .btn.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.15)}
+    .btn.ghost:hover{border-color:var(--blue);color:var(--blue)}
 
-    /* GRID SECTIONS */
-    section{max-width:1200px;margin:0 auto;padding:40px 20px;}
-    .title{
-      font-size:26px;font-weight:700;margin-bottom:28px;
-      display:flex;align-items:center;gap:12px;
-    }
-    .title::before{
-      content:"";width:6px;height:26px;background:var(--primary);
-      border-radius:6px;
+    .hero-card{
+      border-radius:var(--radius);
+      height:340px;background:#000;overflow:hidden;position:relative;
+      border:1px solid var(--glass-border);
+      box-shadow:0 20px 50px rgba(0,0,0,0.55);
     }
 
-    /* SERVICE CARDS */
-    .services{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;}
-    .service-card{
-      background:var(--card);padding:28px;border-radius:var(--radius);
-      border:1px solid rgba(255,255,255,0.05);
-      transition:0.35s;cursor:pointer;
+    /* SECTIONS */
+    .section-title{
+      font-size:26px;font-weight:700;margin:20px 0 10px;
+      padding-left:14px;border-left:4px solid var(--blue);
     }
-    .service-card:hover{
-      transform:translateY(-8px);
-      border-color:var(--primary);
-    }
-    .service-card i{font-size:32px;color:var(--primary);margin-bottom:16px;}
-    .service-card h3{font-size:20px;margin-bottom:10px;}
-    .service-card p{color:var(--sub);font-size:14px;line-height:1.5;}
 
-    /* PROJECT CARDS */
-    .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px;margin-top:10px;}
+    .projects{
+      max-width:1300px;margin:40px auto;padding:20px;
+      display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:28px;
+    }
     .project-card{
-      background:var(--card);padding:0;border-radius:var(--radius);
-      overflow:hidden;border:1px solid rgba(255,255,255,0.05);
-      transition:0.3s;
+      background:var(--glass);border:1px solid var(--glass-border);
+      border-radius:var(--radius);padding:20px;transition:.3s;cursor:pointer;
     }
-    .project-card:hover{transform:translateY(-8px);border-color:var(--primary);}    
-    .project-card img{width:100%;height:200px;object-fit:cover;}
-    .project-info{padding:20px;}
-    .project-info h4{font-size:18px;margin-bottom:8px;}
-    .project-info p{color:var(--sub);font-size:14px;line-height:1.5;}
+    .project-card:hover{
+      transform:translateY(-8px);border-color:var(--blue);
+      box-shadow:0 18px 40px rgba(0,0,0,0.45);
+    }
+    .project-thumb{
+      width:100%;height:180px;border-radius:14px;object-fit:cover;margin-bottom:12px;
+      filter:brightness(0.85);
+      transition:0.35s;
+    }
+    .project-card:hover .project-thumb{filter:brightness(1)}
 
     /* PRICING */
-    .pricing{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px;margin-top:20px;}
-    .price-box{
-      background:var(--card);padding:30px;text-align:center;
-      border-radius:var(--radius);border:1px solid rgba(255,255,255,0.05);
-      transition:0.3s;
+    .pricing{
+      max-width:1300px;margin:40px auto;padding:20px;
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:26px;
     }
-    .price-box:hover{transform:translateY(-8px);border-color:var(--primary);}    
-    .price-amount{font-size:32px;font-weight:800;color:var(--primary);margin:22px 0;}
-    .price-box ul{color:var(--sub);font-size:14px;list-style:none;margin-top:12px;line-height:1.7;}
+    .price-card{
+      background:var(--glass);border:1px solid var(--glass-border);
+      border-radius:var(--radius);padding:30px;text-align:center;transition:.3s;
+    }
+    .price-card:hover{border-color:var(--blue);transform:translateY(-6px)}
+    .price-card h3{font-size:20px;margin-bottom:8px}
+    .price-card .price{font-size:32px;color:var(--blue);font-weight:700;margin:14px 0}
 
     /* CONTACT */
-    .contact-box{
-      background:var(--card);padding:32px;border-radius:var(--radius);
-      border:1px solid rgba(255,255,255,0.05);
-      max-width:600px;margin:auto;
+    .contact{
+      max-width:900px;margin:60px auto;padding:20px;
+      background:var(--glass);border:1px solid var(--glass-border);
+      border-radius:var(--radius);
     }
-    .contact-box input,.contact-box textarea{
+    .input{
       width:100%;padding:14px;border-radius:12px;margin-bottom:14px;
-      border:1px solid rgba(255,255,255,0.08);
-      background:#0b1220;color:#fff;
+      border:1px solid rgba(255,255,255,0.12);
+      background:rgba(0,0,0,0.25);color:#fff;
     }
+    .input:focus{border-color:var(--blue);outline:none}
 
-    footer{margin:80px 0 40px;text-align:center;color:var(--sub);font-size:14px;}
+    footer{text-align:center;margin:60px 0;color:rgba(255,255,255,0.35)}
+
+    @media(max-width:900px){
+      .hero{grid-template-columns:1fr;gap:40px;margin-top:120px}
+      nav{height:70px;padding:0 20px}
+      .nav-links{display:none}
+    }
   </style>
 </head>
 <body>
 
   <nav>
     <h2>Abdulhabib</h2>
-    <ul>
-      <li><a href="#services">Layanan</a></li>
-      <li><a href="#projects">Project</a></li>
-      <li><a href="#pricing">Harga</a></li>
-      <li><a href="#contact">Kontak</a></li>
-    </ul>
-    <a href="#contact" class="btn-primary">Mulai Proyek</a>
+    <div class="nav-links">
+      <a href="#projects">Projects</a>
+      <a href="#pricing">Harga</a>
+      <a href="#contact">Kontak</a>
+    </div>
   </nav>
 
-  <header>
-    <h1>Solusi Digital Premium<br>Untuk Website, Brand, dan Sistem Anda</h1>
-    <p>Saya membangun website cepat, desain modern, sistem PWA, dashboard interaktif,
-    dan aplikasi bisnis yang dirancang seperti standar agency internasional.</p>
+  <section class="hero">
+    <div>
+      <h1>Membangun Produk Digital<br>Untuk Brand Masa Depan</h1>
+      <p>Saya Abdulhabib — Web Engineer yang fokus pada website cepat, UI presisi, dan sistem modern.
+         Menggabungkan teknologi dan visual estetis khas digital agency premium.</p>
 
-    <div class="cta">
-      <a href="#contact" class="btn-primary">Konsultasi Gratis</a>
-      <a href="#projects" class="btn-primary" style="background:#1e293b;color:var(--fg)">Lihat Portofolio</a>
+      <a class="btn" href="#contact">Mulai Proyek</a>
+      <a class="btn ghost" href="#">Download CV</a>
     </div>
-  </header>
 
-  <!---------------- SERVICES ---------------->
-  <section id="services">
-    <h2 class="title">Layanan</h2>
-    <div class="services">
-      <div class="service-card">
-        <i class="fa-solid fa-code"></i>
-        <h3>Website Premium</h3>
-        <p>Desain modern, cepat, SEO-ready, dan tampil seperti agency internasional.</p>
-      </div>
-
-      <div class="service-card">
-        <i class="fa-solid fa-layer-group"></i>
-        <h3>UI/UX Design</h3>
-        <p>Komponen clean, konsisten, responsif, dengan standar modern.</p>
-      </div>
-
-      <div class="service-card">
-        <i class="fa-solid fa-mobile-screen"></i>
-        <h3>PWA & Mobile Web</h3>
-        <p>Aplikasi web offline-ready, caching pintar, performa tinggi.</p>
-      </div>
+    <div class="hero-card">
+      <!-- Kosongkan ilustrasi, user bisa ganti Lottie / gambar -->
     </div>
   </section>
 
-  <!---------------- PROJECTS ---------------->
-  <section id="projects">
-    <h2 class="title">Projek Pilihan</h2>
+  <h2 class="section-title" id="projects">Projek Unggulan</h2>
 
-    <div class="projects">
-      <div class="project-card">
-        <img src="https://picsum.photos/id/1015/1200/800" />
-        <div class="project-info">
-          <h4>Sistem Akademik Modern</h4>
-          <p>Dashboard realtime dengan role-based access dan fitur lengkap.</p>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <img src="https://picsum.photos/id/1024/1200/800" />
-        <div class="project-info">
-          <h4>PWA Catatan Pintar</h4>
-          <p>Aplikasi offline-first, IndexedDB, dan sinkronisasi otomatis.</p>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <img src="https://picsum.photos/id/1044/1200/800" />
-        <div class="project-info">
-          <h4>E-Commerce Lite</h4>
-          <p>Checkout 1 halaman, Midtrans, admin panel, caching.</p>
-        </div>
-      </div>
+  <div class="projects">
+    <div class="project-card">
+      <img class="project-thumb" src="https://picsum.photos/id/1015/900/600" />
+      <h3>Sistem Akademik Modern</h3>
+      <p>Dashboard realtime, role-based, dan manajemen data cepat.</p>
     </div>
-  </section>
 
-  <!---------------- PRICING ---------------->
-  <section id="pricing">
-    <h2 class="title">Paket Harga</h2>
+    <div class="project-card">
+      <img class="project-thumb" src="https://picsum.photos/id/1006/900/600" />
+      <h3>Smart Notes PWA</h3>
+      <p>Aplikasi offline-first dengan sinkronisasi otomatis.</p>
+    </div>
 
-    <div class="pricing">
-      <div class="price-box">
-        <h3>Basic</h3>
-        <div class="price-amount">Rp 499K</div>
-        <ul>
-          <li>1 Halaman Landing</li>
-          <li>Responsif</li>
-          <li>SEO Dasar</li>
-        </ul>
-      </div>
+    <div class="project-card">
+      <img class="project-thumb" src="https://picsum.photos/id/1072/900/600" />
+      <h3>E-Commerce Lite</h3>
+      <p>Checkout 1 halaman, optimasi gambar, caching, SEO.</p>
+    </div>
+  </div>
 
-      <div class="price-box">
-        <h3>Pro</h3>
-        <div class="price-amount">Rp 1.5Jt</div>
-        <ul>
-          <li>3–5 Halaman</li>
-          <li>Desain Premium</li>
-          <li>Integrasi Form</li>
-        </ul>
-      </div>
+  <h2 class="section-title" id="pricing">Harga Layanan</h2>
 
-      <div class="price-box">
-        <h3>Business</h
+  <div class="pricing">
+    <div class="price-card">
+      <h3>Basic Website</h3>
+      <div class="price">Rp 800K</div>
+      <p>Landing page profesional.</p>
+    </div>
+    <div class="price-card">
+      <h3>Business Website</h3>
+      <div class="price">Rp 2,5Jt</div>
+      <p>Multi‑page, form, hosting, optimasi.</p>
+    </div>
+    <div class="price-card">
+      <h3>Custom System</h3>
+      <div class="price">Start 5Jt</div>
+      <p>Sistem full-stack sesuai kebutuhan.</p>
+    </div>
+  </div>
+
+  <h2 class="section-title" id="contact">Kontak</h2>
+
+  <form class="contact">
+    <input class="input" placeholder="Nama lengkap" />
+    <input class="input" placeholder="Email" />
+    <textarea class="input" placeholder="Ceritakan kebutuhan project Anda" rows="5"></textarea>
+    <button class="btn" style="width:100%">Kirim</button>
+  </form>
+
+  <footer>© 2025 Abdulhabib — Premium Digital Agency</footer>
+
+</body>
+</html>
+
 
 
 
