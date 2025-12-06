@@ -1,198 +1,103 @@
-<!-- Versi Premium Agency - Template Siap Pakai -->
+<!-- Premium Agency Portfolio Template (Rebuilt & Polished) -->
 <!doctype html>
 <html lang="id">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Abdulhabib — Premium Digital Agency</title>
+  <title>Abdulhabib — Agency Portfolio Premium</title>
 
-  <meta name="description" content="Website portofolio premium dengan desain agensi modern — animasi halus, glassmorphism, dan kualitas profesional." />
-  <meta name="theme-color" content="#00c7ff" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <meta name="description" content="Portofolio premium Abdulhabib — Web Developer & Creative Engineer. Tampilan agensi modern, animasi halus, branding kuat, dan layout profesional kelas enterprise." />
+  <meta name="keywords" content="Agency Portfolio, Web Developer, UI/UX, Abdulhabib, Premium Website" />
 
-  <style>
-    :root{
-      --bg:#080b0f; --fg:#eaf2ff;
-      --primary:#00c7ff; --primary-soft:rgba(0,199,255,.15);
-      --card:rgba(255,255,255,0.03); --border:rgba(255,255,255,0.08);
-      --radius:22px; --blur:18px; --shadow:0 14px 45px rgba(0,0,0,0.55);
-    }
-    *{margin:0;padding:0;box-sizing:border-box;font-family:"Poppins",sans-serif;}
-    body{background:var(--bg);color:var(--fg);overflow-x:hidden;}
-
-    /* NAV */
-    nav{
-      position:fixed;top:0;left:0;width:100%;padding:18px 36px;
-      display:flex;justify-content:space-between;align-items:center;
-      background:rgba(0,0,0,0.45);backdrop-filter:blur(20px);
-      border-bottom:1px solid var(--border);z-index:900;
-    }
-    nav h2{font-size:20px;color:var(--primary);font-weight:700;letter-spacing:-.5px;}
-    nav a{color:#cfd9ea;text-decoration:none;margin-left:24px;font-size:14px;transition:.3s;}
-    nav a:hover{color:var(--primary);}
-
-    /* HERO */
-    .hero{
-      padding:160px 36px 100px;
-      max-width:1200px;margin:auto;
-      display:flex;align-items:center;gap:40px;
-    }
-    .hero h1{font-size:40px;line-height:1.3;margin-bottom:16px;}
-    .hero p{opacity:.75;margin-bottom:26px;max-width:480px;}
-    .btn{padding:14px 26px;font-weight:600;border-radius:12px;border:none;cursor:pointer;transition:.3s;}
-    .btn.primary{background:var(--primary);color:#001;}
-    .btn.primary:hover{transform:translateY(-3px);box-shadow:0 10px 22px rgba(0,199,255,.4);}    
-    .btn.ghost{background:transparent;color:var(--fg);border:1px solid var(--border);}
-    .btn.ghost:hover{border-color:var(--primary);color:var(--primary);}
-
-    .hero-img{
-      width:420px;height:420px;border-radius:30px;
-      background:var(--card);border:1px solid var(--border);
-      box-shadow:var(--shadow);backdrop-filter:blur(var(--blur));overflow:hidden;
-    }
-
-    /* SECTION TITLE */
-    .section{max-width:1200px;margin:80px auto 0;padding:0 36px;}
-    .section h2{font-size:26px;margin-bottom:22px;display:flex;align-items:center;gap:12px;}
-    .section h2::before{content:"";width:4px;height:22px;background:var(--primary);border-radius:6px;}
-
-    /* GRID */
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:26px;}
-
-    .card{
-      background:var(--card);border-radius:var(--radius);padding:20px;
-      border:1px solid var(--border);box-shadow:var(--shadow);
-      transition:.4s;cursor:pointer;position:relative;overflow:hidden;
-    }
-    .card:hover{transform:translateY(-10px);border-color:var(--primary);background:rgba(255,255,255,0.06);}    
-    .card img{width:100%;height:180px;object-fit:cover;border-radius:14px;margin-bottom:14px;}
-    .card h3{font-size:18px;margin-bottom:6px;}
-    .card p{font-size:14px;opacity:.7;}
-
-    /* PRICING */
-    .price{padding:30px;text-align:center;}
-    .price .amount{font-size:32px;color:var(--primary);margin:12px 0;}
-    .price ul{list-style:none;text-align:left;margin-top:18px;}
-    .price li{margin-bottom:8px;font-size:14px;opacity:.8;}
-    .price li::before{content:"✓";color:var(--primary);margin-right:8px;}
-
-    /* CONTACT */
-    .contact-box{background:var(--card);padding:30px;border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--shadow);}    
-    input,textarea{
-      width:100%;padding:14px;background:rgba(255,255,255,0.04);
-      border-radius:14px;border:1px solid var(--border);outline:none;margin-bottom:14px;color:var(--fg);
-    }
-    input:focus,textarea:focus{border-color:var(--primary);}    
-
-    footer{text-align:center;margin:80px 0;color:#667;}
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <h2>Abdulhabib Agency</h2>
-    <div>
-      <a href="#projects">Projects</a>
-      <a href="#services">Layanan</a>
-      <a href="#pricing">Harga</a>
-      <a href="#contact">Kontak</a>
-    </div>
-  </nav>
+<!-- ====================== NAVIGATION ====================== -->
+<nav class="nav">
+  <div class="nav-logo">Abdulhabib<span>Studio</span></div>
+  <ul class="nav-menu">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div>
-      <h1>Solusi Digital Premium untuk Bisnis Modern</h1>
-      <p>Saya membangun website, aplikasi, dan UI profesional dengan standar kualitas agensi — cepat, aman, responsif, dan modern.</p>
-      <button class="btn primary">Mulai Proyek</button>
-      <button class="btn ghost">Download CV</button>
+<!-- ====================== HERO SECTION ====================== -->
+<header class="hero" id="home">
+  <div class="hero-text">
+    <h1>Premium Digital Solutions<br/><span>Built for Growth</span></h1>
+    <p>Saya Abdulhabib, Web Engineer yang fokus membangun website premium dengan performa tinggi, visual modern, dan pengalaman pengguna kelas agensi.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">Mulai Proyek</a>
+      <a href="#projects" class="btn-outline">Lihat Portofolio</a>
     </div>
-    <div class="hero-img"></div>
-  </section>
+  </div>
+  <div class="hero-visual"></div>
+</header>
 
-  <!-- PROJECTS -->
-  <section class="section" id="projects">
-    <h2>Projek Terbaik</h2>
-    <div class="grid">
+<!-- ====================== PROJECTS ====================== -->
+<section class="section" id="projects">
+  <h2 class="section-title">Selected Projects</h2>
+  <div class="grid-projects">
       <div class="card">
-        <img src="https://picsum.photos/seed/11/1200/800" />
-        <h3>Sistem Akademik Realtime</h3>
-        <p>Dashboard lengkap dengan manajemen nilai, pengguna, dan presensi.</p>
+        <div class="card-image"></div>
+        <h3>Sistem Akademik Modern</h3>
+        <p>Dashboard realtime dengan integrasi API, role-based access, dan antarmuka enterprise.</p>
       </div>
+
       <div class="card">
-        <img src="https://picsum.photos/seed/12/1200/800" />
+        <div class="card-image"></div>
         <h3>Smart Notes PWA</h3>
-        <p>Aplikasi catatan offline-first dengan sinkronisasi otomatis.</p>
+        <p>Aplikasi catatan offline-first dengan sync otomatis dan desain minimalis premium.</p>
       </div>
+
       <div class="card">
-        <img src="https://picsum.photos/seed/13/1200/800" />
+        <div class="card-image"></div>
         <h3>E-Commerce Lite</h3>
-        <p>Platform belanja cepat dengan payment gateway.</p>
+        <p>Platform jual beli cepat dengan checkout 1 halaman dan optimasi performa modern.</p>
       </div>
+  </div>
+</section>
+
+<!-- ====================== SERVICES ====================== -->
+<section class="section" id="services">
+  <h2 class="section-title">Services</h2>
+  <div class="grid-services">
+    <div class="service-card">
+      <h4>Web Development</h4>
+      <p>Website cepat, aman, dan scalable untuk semua kebutuhan bisnis modern.</p>
     </div>
-  </section>
 
-  <!-- SERVICES -->
-  <section class="section" id="services">
-    <h2>Layanan</h2>
-    <div class="grid">
-      <div class="card"><h3>Website Premium</h3><p>Desain modern, cepat, SEO-ready.</p></div>
-      <div class="card"><h3>Web App / PWA</h3><p>Progresif, offline-ready, performa tinggi.</p></div>
-      <div class="card"><h3>Branding Visual</h3><p>Identitas visual profesional untuk bisnis.</p></div>
+    <div class="service-card">
+      <h4>UI/UX Design</h4>
+      <p>Tampilan premium yang bersih—seperti website agensi internasional.</p>
     </div>
-  </section>
 
-  <!-- PRICING -->
-  <section class="section" id="pricing">
-    <h2>Paket Harga</h2>
-    <div class="grid">
-      <div class="card price">
-        <h3>Starter</h3>
-        <div class="amount">1.5jt</div>
-        <ul>
-          <li>Landing page</li>
-          <li>Responsive design</li>
-          <li>SEO dasar</li>
-        </ul>
-      </div>
-
-      <div class="card price">
-        <h3>Bisnis</h3>
-        <div class="amount">3.5jt</div>
-        <ul>
-          <li>Website lengkap</li>
-          <li>Dashboard admin</li>
-          <li>Optimasi performa</li>
-        </ul>
-      </div>
-
-      <div class="card price">
-        <h3>Premium</h3>
-        <div class="amount">7jt</div>
-        <ul>
-          <li>PWA / Web App</li>
-          <li>Integrasi API</li>
-          <li>Support 1 bulan</li>
-        </ul>
-      </div>
+    <div class="service-card">
+      <h4>Branding & Identity</h4>
+      <p>Konsep visual profesional yang meningkatkan kepercayaan klien.</p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- CONTACT -->
-  <section class="section" id="contact">
-    <h2>Kontak</h2>
-    <div class="contact-box">
-      <input type="text" placeholder="Nama" />
-      <input type="email" placeholder="Email" />
-      <textarea rows="4" placeholder="Pesan"></textarea>
-      <button class="btn primary" style="width:100%">Kirim</button>
-    </div>
-  </section>
+<!-- ====================== CONTACT ====================== -->
+<section class="section" id="contact">
+  <h2 class="section-title">Hubungi Saya</h2>
+  <form class="contact-form">
+    <input type="text" placeholder="Nama" required>
+    <input type="email" placeholder="Email" required>
+    <textarea placeholder="Pesan Anda" required></textarea>
+    <button class="btn-primary" type="submit">Kirim Pesan</button>
+  </form>
+</section>
 
-  <footer>© 2025 Abdulhabib — Premium Digital Agency</footer>
+<footer class="footer">© 2025 Abdulhabib Studio — All Rights Reserved</footer>
+
 </body>
 </html>
+
 
 
 
