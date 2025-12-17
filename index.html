@@ -1,1374 +1,1215 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Judul diperbarui dengan nama bergaya -->
-    <title>𝖆𝖇𝖉𝖚𝖑𝖍𝖆𝖇𝖎𝖇 - Web Engineer</title>
-    <!-- Memuat Tailwind CSS -->
+    <title>Situs Web Profesional & Interaktif</title>
+    <!-- Load Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Load Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <style>
-        /* Gaya Kustom */
+        /* Menggunakan font Inter secara default */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #1a1a2e; /* Warna latar belakang gelap untuk tema modern */
-            color: #ffffff;
-            transition: background-color 0.3s ease;
-            overflow: hidden; /* Sembunyikan scrollbar saat loading */
+            color: #1f2937; /* Gray-800 */
+            background-color: #f9fafb; /* Gray-50 */
         }
-
-        /* --- LOADING SCREEN --- */
-        #loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #0d0d1a; /* Sangat gelap */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 1;
-            transition: opacity 0.7s ease-out, visibility 0.7s ease-out;
-            visibility: visible;
+        .card-hover-effect {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        .loading-hidden {
-            opacity: 0 !important;
-            visibility: hidden !important;
+        .card-hover-effect:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.15), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
-        
-        /* Konten Utama */
-        #main-content {
-            opacity: 0;
-            transition: opacity 0.7s ease-in; 
+        .cta-button {
+            transition: background-color 0.3s, transform 0.1s;
         }
-
-        .content-visible {
-            opacity: 1 !important;
-            height: 100vh;
-            overflow-y: auto; 
+        .cta-button:hover {
+            transform: translateY(-1px);
         }
-
-        /* Styling untuk progress bar */
-        .progress-container {
-            width: 80%;
-            max-width: 400px;
-            height: 10px;
-            background-color: #242442;
-            border-radius: 5px;
-            overflow: hidden;
-            margin-top: 20px;
-            box-shadow: 0 0 10px rgba(0, 240, 181, 0.4);
-        }
-
-        .progress-bar {
-            height: 100%;
-            width: 0;
-            background-color: #00f0b5;
-            animation: fillProgress 6s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
-        }
-
-        @keyframes fillProgress {
-            0% { width: 0%; }
-            100% { width: 100%; }
-        }
-
-        /* --- Styling untuk Orb Animasi Futuristik --- */
-        .anime-orb {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: radial-gradient(circle, #00f0b5 0%, #1a1a2e 70%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 0 20px rgba(0, 240, 181, 0.8);
-            animation: pulseGlow 1.5s infinite alternate;
-            position: relative;
-            z-index: 10;
-        }
-
-        .orb-inner {
-            font-size: 30px;
-            font-weight: 900;
-            color: #1a1a2e;
-            text-shadow: 1px 1px 0 #00f0b5;
-        }
-
-        @keyframes pulseGlow {
-            0% {
-                box-shadow: 0 0 10px rgba(0, 240, 181, 0.4), 0 0 30px rgba(0, 240, 181, 0.2);
-                transform: scale(1.0);
-            }
-            100% {
-                box-shadow: 0 0 20px rgba(0, 240, 181, 0.9), 0 0 50px rgba(0, 240, 181, 0.6);
-                transform: scale(1.05);
-            }
-        }
-        /* --- Akhir Styling Orb Animasi --- */
-        
-        /* Gaya Jam dan Tanggal Futuristik */
-        #dateTimeDisplay {
-            background-color: #242442; 
-            border: 1px solid #00f0b5; 
-            padding: 1rem;
-            border-radius: 10px;
-            margin-bottom: 2rem;
-            box-shadow: 0 0 15px rgba(0, 240, 181, 0.5);
-            text-align: center;
-            font-family: monospace; 
-        }
-        
-        .time-text {
-            font-size: 2.5rem; 
-            color: #00f0b5;
-            letter-spacing: 0.1em;
-            font-weight: 700;
-            text-shadow: 0 0 8px rgba(0, 240, 181, 0.8);
-        }
-        
-        .date-text {
-            font-size: 1.1rem;
-            color: #ffffff;
-            opacity: 0.7;
-            margin-top: 0.5rem;
-        }
-
-        /* Gaya Khusus Dashboard Kontak */
-        .contact-dashboard {
-            background-color: #0d0d1a;
-            border: 2px solid #00f0b5;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 0 30px rgba(0, 240, 181, 0.7);
-            margin-top: 3rem;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .contact-card {
-            background-color: #242442;
-            border: 1px solid #3e3e60;
-            border-radius: 10px;
-            padding: 1.5rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .contact-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            border-color: #00f0b5;
-            box-shadow: 0 0 25px rgba(0, 240, 181, 0.4);
-        }
-
-        .card-icon {
-            color: #00f0b5;
-            width: 40px;
-            height: 40px;
-        }
-
-        /* Animasi Text Scramble */
-        .scramble {
-            display: inline-block;
-            color: #00f0b5;
-            font-family: monospace;
-            text-shadow: 0 0 5px rgba(0, 240, 181, 0.5);
-        }
-
-        .copy-btn {
-            background-color: #3e3e60;
-            color: #ffffff;
-            padding: 0.4rem 0.8rem;
-            border-radius: 5px;
-            font-size: 0.8rem;
-            transition: background-color 0.2s;
-        }
-
-        /* Gaya Khusus Pricing Card */
-        .pricing-card {
-            background-color: #242442;
-            border: 1px solid #3e3e60;
-            border-radius: 15px;
-            padding: 2.5rem 1.5rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-10px);
-            border-color: #00f0b5;
-            box-shadow: 0 0 30px rgba(0, 240, 181, 0.5);
-        }
-
-        .featured-card {
-            border: 3px solid #00f0b5;
-            background-color: #3e3e60;
-            transform: scale(1.05);
-        }
-        .featured-card:hover {
-            transform: translateY(-10px) scale(1.05);
-        }
-
-        .pricing-header {
-            border-bottom: 2px dashed #00f0b5;
-            padding-bottom: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .price-tag {
-            font-size: 3.5rem;
-            font-weight: 800;
-            color: #00f0b5;
-            text-shadow: 0 0 10px rgba(0, 240, 181, 0.7);
-        }
-        
-        /* Gaya Khusus Chat */
-        .chat-box {
-            height: 400px;
-            overflow-y: auto;
+        html {
             scroll-behavior: smooth;
         }
-        .message-bubble {
-            max-width: 80%;
-            padding: 8px 12px;
-            border-radius: 15px;
-            margin-bottom: 8px;
+
+        /* Styling for the Analog Clock */
+        .analog-clock {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 4px solid #3b82f6;
+            position: relative;
+            background: white;
+            box-shadow: 0 6px 10px -3px rgba(0, 0, 0, 0.15);
         }
-        .user-message {
-            background-color: #00f0b5;
-            color: #1a1a2e;
-            margin-left: auto;
-            border-bottom-right-radius: 2px;
+        .hand {
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            transform-origin: center bottom;
+            background: #1f2937;
+            border-radius: 1px;
+            z-index: 10;
         }
-        .other-message {
-            background-color: #3e3e60;
-            color: #ffffff;
-            margin-right: auto;
-            border-bottom-left-radius: 2px;
+        .hour-hand { width: 4px; height: 30%; margin-left: -2px; }
+        .minute-hand { width: 3px; height: 40%; margin-left: -1.5px; }
+        .second-hand { width: 1px; height: 45%; margin-left: -0.5px; background: #ef4444; }
+        .center-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #3b82f6;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 11;
+        }
+        .clock-number {
+            position: absolute;
+            font-size: 10px;
+            font-weight: bold;
+            color: #1f2937;
+            text-align: center;
+            width: 15px;
+            height: 15px;
+            line-height: 15px;
+            transform: translate(-50%, -50%);
         }
 
-        /* Kalkulator */
+        /* NEW CSS: Styling for Loading Screen Animation (Memuat Data Orang) */
+        @keyframes pulse-dot-pro {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.5; }
+        }
+
+        .dot-animation {
+            animation: pulse-dot-pro 1.5s infinite ease-in-out;
+        }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-400 { animation-delay: 0.4s; }
+
+        /* Padding untuk konten utama agar tidak tertutup navbar dan jam */
+        .main-content-padding {
+             padding-top: 11rem;
+        }
+        
+        /* Kalkulator Styling */
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4px;
+        }
         .calc-btn {
-            padding: 15px;
-            border-radius: 10px;
-            font-size: 1.5rem;
-            font-weight: bold;
-            transition: all 0.1s ease-in-out;
-            box-shadow: 0 4px #1a1a2e;
+            @apply p-3 rounded-lg text-lg font-semibold bg-gray-200 hover:bg-gray-300 transition duration-150;
         }
-        .num-btn {
-            background-color: #3e3e60;
-            color: #ffffff;
-            transition: background-color 0.1s ease;
-            &:hover {
-                background-color: #5a5a78;
-            }
-        }
-        .op-btn {
-            background-color: #242442;
-            color: #00f0b5;
-            &:hover {
-                background-color: #3e3e60;
-            }
-        }
-        .eq-btn {
-            background-color: #00f0b5;
-            color: #1a1a2e;
-            &:hover {
-                background-color: #28ff9a;
-            }
+        .calc-op {
+            @apply bg-primary text-white hover:bg-primary-dark;
         }
     </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#3b82f6', // Blue 600
+                        'primary-dark': '#2563eb', // Blue 700
+                        'secondary': '#1f2937', // Dark Gray
+                    },
+                }
+            }
+        }
+    </script>
 </head>
-<body class="min-h-screen">
+<body class="antialiased">
 
-    <!-- 1. LOADING SCREEN (Layar Pemuatan 6 Detik) -->
-    <div id="loading-screen">
-        <div class="mx-auto anime-orb mb-4">
-            <span class="orb-inner">A</span>
+    <!-- Loading Screen (Animasi 5 Detik) -->
+    <div id="loading-screen" class="fixed inset-0 bg-secondary flex flex-col items-center justify-center z-[9999] transition-opacity duration-1000 opacity-100">
+        
+        <!-- Animasi "Memuat Data Orang" -->
+        <div class="flex items-center space-x-3 mb-6">
+            <div class="w-4 h-4 bg-primary rounded-full dot-animation"></div>
+            <div class="w-4 h-4 bg-primary-dark rounded-full dot-animation delay-200"></div>
+            <div class="w-4 h-4 bg-primary rounded-full dot-animation delay-400"></div>
         </div>
-        <h1 class="text-4xl font-extrabold text-[#00f0b5] mb-2">SISTEM AKTIF...</h1>
-        <p class="text-xl font-semibold text-white">Memuat Data (Maks. 6 Detik)</p>
-        <div class="progress-container">
-            <div class="progress-bar" id="progressBar"></div>
+
+        <div class="text-white text-2xl font-bold tracking-wider mb-2">
+            MEMUAT DATA ORANG...
+        </div>
+        <div id="loading-text" class="text-gray-300 text-sm">
+            Memulai inisialisasi modul dan demo interaktif.
         </div>
     </div>
 
-    <!-- 2. Konten Utama Website -->
-    <div id="main-content" class="container mx-auto p-4 md:p-8 pt-12">
+    <!-- Main Content Wrapper (Hidden initially) -->
+    <div id="main-content" class="min-h-screen opacity-0 transition-opacity duration-500">
         
-        <!-- Header Profil -->
-        <header class="text-center mb-16 bg-[#242442] p-8 rounded-xl shadow-2xl">
-            <!-- Avatar: Orb Animasi -->
-            <div class="mx-auto anime-orb" id="anime-avatar-orb">
-                <span class="orb-inner">A</span>
-            </div>
-            <!-- Nama diganti dengan gaya khusus -->
-            <h1 class="text-4xl md:text-5xl font-extrabold mt-4 text-[#00f0b5]">
-                𝖆𝖇𝖉𝖚𝖑𝖍𝖆𝖇𝖎𝖇
-            </h1>
-            <p class="text-xl font-light text-gray-300">
-                Web Engineer | Kreator Konten Anime
-            </p>
-            <div id="user-info-display" class="mt-2 text-sm text-gray-400">
-                <!-- User ID akan ditampilkan di sini setelah autentikasi -->
-            </div>
-            
-            <!-- Button Kontak/Call to Action -->
-            <button onclick="scrollToContact()" class="mt-6 px-6 py-3 bg-[#00f0b5] text-gray-900 font-bold rounded-full transition duration-300 hover:bg-[#28ff9a]">
-                Hubungi Saya Sekarang!
-            </button>
-        </header>
+        <!-- Navbar -->
+        <nav id="navbar" class="fixed top-0 left-0 right-0 bg-white shadow-md z-50 transition-all duration-300">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <!-- Logo -->
+                    <div class="flex-shrink-0">
+                        <a href="#hero" class="text-2xl font-bold text-primary">WebPro.</a>
+                    </div>
 
-        <!-- Navigasi -->
-        <nav class="mb-8 border-b border-[#00f0b5]/50 pb-4">
-            <ul class="flex justify-center space-x-4 md:space-x-8 text-lg font-medium">
-                <li><a href="#" class="text-gray-400 hover:text-[#00f0b5] transition duration-200">Tentang Saya</a></li>
-                <li><a onclick="scrollToPricing()" class="text-gray-400 hover:text-[#00f0b5] transition duration-200 cursor-pointer">Layanan</a></li>
-                <li><a href="#" class="text-gray-400 hover:text-[#00f0b5] transition duration-200">Proyek</a></li>
-                <li><a onclick="scrollToContact()" class="text-gray-400 hover:text-[#00f0b5] transition duration-200 cursor-pointer">Kontak</a></li>
-            </ul>
+                    <!-- Desktop Menu -->
+                    <div class="hidden md:flex space-x-8">
+                        <a href="#layanan" class="text-secondary hover:text-primary transition duration-150">Layanan</a>
+                        <a href="#portfolio" class="text-secondary hover:text-primary transition duration-150">Portofolio</a>
+                        <a href="#harga" class="text-secondary hover:text-primary transition duration-150">Harga</a>
+                        <a href="#kontak" class="text-white bg-primary hover:bg-primary-dark px-4 py-2 rounded-lg font-medium cta-button">Pesan Sekarang</a>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <div class="md:hidden flex items-center">
+                        <button id="mobile-menu-button" class="text-secondary hover:text-primary focus:outline-none">
+                            <i data-lucide="menu" class="w-6 h-6"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Menu (Hidden by default) -->
+            <div id="mobile-menu" class="hidden md:hidden">
+                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                    <a href="#layanan" class="block px-3 py-2 rounded-md text-base font-medium text-secondary hover:bg-gray-100">Layanan</a>
+                    <a href="#portfolio" class="block px-3 py-2 rounded-md text-base font-medium text-secondary hover:bg-gray-100">Portofolio</a>
+                    <a href="#harga" class="block px-3 py-2 rounded-md text-base font-medium text-secondary hover:bg-gray-100">Harga</a>
+                    <a href="#kontak" class="block px-3 py-2 rounded-md text-base font-medium text-white bg-primary hover:bg-primary-dark">Pesan Sekarang</a>
+                </div>
+            </div>
         </nav>
-        
-        <!-- FITUR BARU: JAM DAN TANGGAL FUTURISTIK -->
-        <div id="dateTimeDisplay" class="max-w-xl mx-auto">
-            <div id="currentTime" class="time-text">--:--:--</div>
-            <div id="currentDate" class="date-text">Tanggal tidak tersedia</div>
-        </div>
-        
-        <!-- Bagian Proyek/Konten -->
-        <h2 class="text-3xl md:text-4xl font-extrabold mb-8 border-l-4 border-[#00f0b5] pl-4">
-            Karya Fiksi Keren (5 Live Demo Fungsional)
-        </h2>
+        <!-- End Navbar -->
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mb-10">
+        <!-- Jam Analog dan Tanggal (Tengah Atas) -->
+        <div id="time-display" class="fixed top-16 left-0 right-0 z-40 bg-white/95 backdrop-blur-sm shadow-lg py-3 transition-all duration-300">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-center items-center space-x-6">
+                <div id="analog-clock" class="analog-clock">
+                    <!-- Angka/Penanda Waktu akan dibuat di JS -->
+                    <div id="hour-hand" class="hand hour-hand"></div>
+                    <div id="minute-hand" class="hand minute-hand"></div>
+                    <div id="second-hand" class="hand second-hand"></div>
+                    <div class="center-dot"></div>
+                </div>
+                <div class="text-secondary text-sm md:text-base font-semibold text-center">
+                    <div id="digital-date" class="block font-medium"></div>
+                    <div id="digital-time" class="text-xl font-extrabold text-primary block"></div>
+                </div>
+            </div>
+        </div>
+        <!-- End Jam Analog dan Tanggal -->
+
+        <main class="main-content-padding">
+            <!-- 1. Hero Section -->
+            <section id="hero" class="pt-10 pb-20 md:pt-20 md:pb-32 bg-secondary text-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight mb-4 animate-in fade-in slide-in-from-top-4 duration-500">
+                        Situs Web Profesional, Cepat, dan Elegan
+                    </h1>
+                    <p class="text-lg sm:text-xl text-gray-300 mb-8 max-w-3xl mx-auto animate-in fade-in duration-700 delay-150">
+                        Tingkatkan kredibilitas dan jangkauan bisnis Anda dengan solusi website modern, cepat, dan sepenuhnya responsif.
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="#portfolio" class="bg-primary hover:bg-primary-dark text-white font-semibold py-3 px-8 rounded-lg shadow-lg cta-button">
+                            Lihat Demo & Proyek
+                        </a>
+                        <a href="#kontak" class="bg-white text-secondary hover:bg-gray-200 border border-gray-300 font-semibold py-3 px-8 rounded-lg shadow-lg cta-button">
+                            Konsultasi Gratis
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Layanan (Existing) -->
+            <section id="layanan" class="py-16 md:py-24 bg-gray-50">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-12">
+                        <span class="text-primary font-semibold uppercase tracking-wider mb-2 block">Layanan Kami</span>
+                        <h2 class="text-3xl md:text-4xl font-bold text-secondary">Solusi Digital yang Kami Tawarkan</h2>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="bg-white p-8 rounded-xl shadow-lg card-hover-effect">
+                            <i data-lucide="briefcase" class="w-10 h-10 text-primary mb-4"></i>
+                            <h3 class="text-xl font-bold text-secondary mb-3">Website Company Profile</h3>
+                            <p class="text-gray-600">Representasi digital terbaik untuk perusahaan kecil dan startup. Menampilkan visi, misi, dan produk Anda secara profesional.</p>
+                        </div>
+                        <div class="bg-white p-8 rounded-xl shadow-lg card-hover-effect">
+                            <i data-lucide="mouse-pointer-2" class="w-10 h-10 text-primary mb-4"></i>
+                            <h3 class="text-xl font-bold text-secondary mb-3">Landing Page Konversi Tinggi</h3>
+                            <p class="text-gray-600">Halaman tunggal yang didesain khusus untuk kampanye pemasaran, fokus pada satu tujuan: konversi pelanggan.</p>
+                        </div>
+                        <div class="bg-white p-8 rounded-xl shadow-lg card-hover-effect">
+                            <i data-lucide="shopping-cart" class="w-10 h-10 text-primary mb-4"></i>
+                            <h3 class="text-xl font-bold text-secondary mb-3">Toko Online / E-commerce</h3>
+                            <p class="text-gray-600">Situs toko online lengkap dengan manajemen produk, keranjang belanja, dan integrasi pembayaran.</p>
+                        </div>
+                        <div class="bg-white p-8 rounded-xl shadow-lg card-hover-effect">
+                            <i data-lucide="user" class="w-10 h-10 text-primary mb-4"></i>
+                            <h3 class="text-xl font-bold text-secondary mb-3">Portfolio Pribadi / Personal Brand</h3>
+                            <p class="text-gray-600">Tunjukkan karya dan keahlian Anda secara online dengan desain yang unik dan menonjol.</p>
+                        </div>
+                        <div class="bg-white p-8 rounded-xl shadow-lg card-hover-effect">
+                            <i data-lucide="globe" class="w-10 h-10 text-primary mb-4"></i>
+                            <h3 class="text-xl font-bold text-secondary mb-3">Custom Web Application</h3>
+                            <p class="text-gray-600">Pembuatan aplikasi web kustom untuk sistem internal, CRM, atau manajemen data khusus.</p>
+                        </div>
+                        <div class="bg-white p-8 rounded-xl shadow-lg card-hover-effect">
+                            <i data-lucide="layout-dashboard" class="w-10 h-10 text-primary mb-4"></i>
+                            <h3 class="text-xl font-bold text-secondary mb-3">Design & Prototyping (UI/UX)</h3>
+                            <p class="text-gray-600">Layanan penuh mulai dari wireframe, desain visual, hingga prototipe fungsional.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Portfolio & Live Demo Section (Diperluas dengan 8 Demo Interaktif) -->
+            <section id="portfolio" class="py-16 md:py-24 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-12">
+                        <span class="text-primary font-semibold uppercase tracking-wider mb-2 block">Portofolio & Demo</span>
+                        <h2 class="text-3xl md:text-4xl font-bold text-secondary">Lihat Hasil Kerja Kami & Coba Demo Interaktif</h2>
+                    </div>
+                    <!-- Grid 4 Kolom untuk 8 Item Demo -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        
+                        <!-- Portfolio Item 1: Landing Page (Demo A - Non-Interaktif) -->
+                        <div class="bg-gray-50 rounded-xl overflow-hidden shadow-xl card-hover-effect group">
+                            <div class="h-48 bg-cover bg-center transition-transform duration-300 group-hover:scale-[1.02]" style="background-image: url('https://placehold.co/600x400/3b82f6/ffffff?text=Landing+Page+Demo');" role="img" aria-label="Gambar Placeholder untuk Landing Page Demo"></div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-secondary mb-2 group-hover:text-primary transition duration-150">Landing Page Produk Baru</h3>
+                                <p class="text-gray-600 text-sm mb-4">Jenis: Landing Page Konversi | Klien: Startup Teknologi</p>
+                                <div class="flex space-x-3">
+                                    <a href="https://placehold.co/600x400/3b82f6/ffffff?text=Live+Demo+1" target="_blank" class="text-sm font-semibold text-white bg-primary hover:bg-primary-dark px-4 py-2 rounded-lg flex items-center cta-button">
+                                        <i data-lucide="external-link" class="w-4 h-4 mr-1"></i> Lihat Demo
+                                    </a>
+                                    <button onclick="showDetails('Project A: Landing Page', 'Ini adalah demo landing page yang fokus pada satu produk dengan CTA yang sangat jelas. Dibuat untuk konversi maksimal dan kecepatan tinggi.')" class="text-sm font-semibold text-secondary hover:text-primary border border-gray-300 px-4 py-2 rounded-lg flex items-center transition duration-150">
+                                        <i data-lucide="info" class="w-4 h-4 mr-1"></i> Detail Project
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Portfolio Item 2: Toko Online (Demo B - Non-Interaktif) -->
+                        <div class="bg-gray-50 rounded-xl overflow-hidden shadow-xl card-hover-effect group">
+                            <div class="h-48 bg-cover bg-center transition-transform duration-300 group-hover:scale-[1.02]" style="background-image: url('https://placehold.co/600x400/1f2937/ffffff?text=Toko+Online+Fashion');" role="img" aria-label="Gambar Placeholder untuk Toko Online Fashion"></div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-secondary mb-2 group-hover:text-primary transition duration-150">Toko Online Fashion</h3>
+                                <p class="text-gray-600 text-sm mb-4">Jenis: E-commerce | Klien: UMKM Pakaian</p>
+                                <div class="flex space-x-3">
+                                    <a href="https://placehold.co/600x400/1f2937/ffffff?text=Live+Demo+2" target="_blank" class="text-sm font-semibold text-white bg-primary hover:bg-primary-dark px-4 py-2 rounded-lg flex items-center cta-button">
+                                        <i data-lucide="external-link" class="w-4 h-4 mr-1"></i> Lihat Demo
+                                    </a>
+                                    <button onclick="showDetails('Project B: Toko Online', 'Platform e-commerce dengan fitur filter produk, keranjang, dan checkout via WhatsApp/Payment Gateway.')" class="text-sm font-semibold text-secondary hover:text-primary border border-gray-300 px-4 py-2 rounded-lg flex items-center transition duration-150">
+                                        <i data-lucide="info" class="w-4 h-4 mr-1"></i> Detail Project
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- --------------------------------------- -->
+                        <!-- START: 5 DEMO MINIGAMES BARU (G, H, I, J, K) -->
+                        <!-- --------------------------------------- -->
+
+                        <!-- Demo G: Kalkulator (Baru) -->
+                        <div class="bg-gray-50 rounded-xl overflow-hidden shadow-xl card-hover-effect group">
+                            <div class="h-48 flex items-center justify-center bg-gray-200 transition-transform duration-300 group-hover:scale-[1.02]">
+                                <i data-lucide="calculator" class="w-12 h-12 text-secondary"></i>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-secondary mb-2 group-hover:text-primary transition duration-150">Demo G: Kalkulator Sederhana</h3>
+                                <p class="text-gray-600 text-sm mb-4">Jenis: Minigame/Tool | Fungsi: Logika Komputasi Dasar</p>
+                                <div class="flex space-x-3">
+                                    <button onclick="showDetails('Project G: Kalkulator Sederhana', 'Demonstrasi kemampuan logika pemrograman. Coba hitung cepat!', 'calculator')" class="text-sm font-semibold text-white bg-secondary hover:bg-gray-700 px-4 py-2 rounded-lg flex items-center cta-button">
+                                        <i data-lucide="play" class="w-4 h-4 mr-1"></i> Coba Demo Live
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Demo H: Uji Kecepatan Ketik (Baru) -->
+                        <div class="bg-gray-50 rounded-xl overflow-hidden shadow-xl card-hover-effect group">
+                            <div class="h-48 flex items-center justify-center bg-amber-100 transition-transform duration-300 group-hover:scale-[1.02]">
+                                <i data-lucide="keyboard" class="w-12 h-12 text-amber-600"></i>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-secondary mb-2 group-hover:text-primary transition duration-150">Demo H: Uji Kecepatan Ketik</h3>
+                                <p class="text-gray-600 text-sm mb-4">Jenis: Minigame | Fungsi: Pengukuran WPM</p>
+                                <div class="flex space-x-3">
+                                    <button onclick="showDetails('Project H: Uji Kecepatan Ketik', 'Demonstrasi pengukuran performa input pengguna. Uji kecepatan mengetik Anda!', 'typing-test')" class="text-sm font-semibold text-white bg-amber-600 hover:bg-amber-700 px-4 py-2 rounded-lg flex items-center cta-button">
+                                        <i data-lucide="play" class="w-4 h-4 mr-1"></i> Coba Demo Live
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Demo I: To-Do List (Baru) -->
+                        <div class="bg-gray-50 rounded-xl overflow-hidden shadow-xl card-hover-effect group">
+                            <div class="h-48 flex items-center justify-center bg-teal-100 transition-transform duration-300 group-hover:scale-[1.02]">
+                                <i data-lucide="list-checks" class="w-12 h-12 text-teal-600"></i>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-secondary mb-2 group-hover:text-primary transition duration-150">Demo I: Aplikasi To-Do List</h3>
+                                <p class="text-gray-600 text-sm mb-4">Jenis: Minigame/App | Fungsi: Manipulasi Array/State</p>
+                                <div class="flex space-x-3">
+                                    <button onclick="showDetails('Project I: To-Do List', 'Aplikasi demonstrasi manajemen daftar tugas (state management).', 'todo-list')" class="text-sm font-semibold text-white bg-teal-600 hover:bg-teal-700 px-4 py-2 rounded-lg flex items-center cta-button">
+                                        <i data-lucide="play" class="w-4 h-4 mr-1"></i> Coba Demo Live
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Demo J: Quote Generator (Baru) -->
+                        <div class="bg-gray-50 rounded-xl overflow-hidden shadow-xl card-hover-effect group">
+                            <div class="h-48 flex items-center justify-center bg-rose-100 transition-transform duration-300 group-hover:scale-[1.02]">
+                                <i data-lucide="quote" class="w-12 h-12 text-rose-600"></i>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-secondary mb-2 group-hover:text-primary transition duration-150">Demo J: Generator Kutipan Random</h3>
+                                <p class="text-gray-600 text-sm mb-4">Jenis: Minigame/Tool | Fungsi: Penggunaan Data Statik</p>
+                                <div class="flex space-x-3">
+                                    <button onclick="showDetails('Project J: Quote Generator', 'Demonstrasi pengambilan data acak dari array data statis.', 'quote-generator')" class="text-sm font-semibold text-white bg-rose-600 hover:bg-rose-700 px-4 py-2 rounded-lg flex items-center cta-button">
+                                        <i data-lucide="play" class="w-4 h-4 mr-1"></i> Coba Demo Live
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Demo K: Simple Quiz (Baru) -->
+                        <div class="bg-gray-50 rounded-xl overflow-hidden shadow-xl card-hover-effect group">
+                            <div class="h-48 flex items-center justify-center bg-indigo-100 transition-transform duration-300 group-hover:scale-[1.02]">
+                                <i data-lucide="help-circle" class="w-12 h-12 text-indigo-600"></i>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-secondary mb-2 group-hover:text-primary transition duration-150">Demo K: Kuis Sederhana</h3>
+                                <p class="text-gray-600 text-sm mb-4">Jenis: Minigame/Aplikasi | Fungsi: Logika Pilihan Ganda</p>
+                                <div class="flex space-x-3">
+                                    <button onclick="showDetails('Project K: Kuis Sederhana', 'Mini kuis untuk menguji logika penanganan jawaban dan penilaian.', 'simple-quiz')" class="text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-lg flex items-center cta-button">
+                                        <i data-lucide="play" class="w-4 h-4 mr-1"></i> Coba Demo Live
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- --------------------------------------- -->
+                        <!-- END: 5 DEMO MINIGAMES BARU (G, H, I, J, K) -->
+                        <!-- --------------------------------------- -->
+
+                        <!-- Portfolio Item 3: Company Profile (Demo C - Non-Interaktif) -->
+                        <div class="bg-gray-50 rounded-xl overflow-hidden shadow-xl card-hover-effect group">
+                            <div class="h-48 bg-cover bg-center transition-transform duration-300 group-hover:scale-[1.02]" style="background-image: url('https://placehold.co/600x400/ffffff/3b82f6?text=Company+Profile+Corp');" role="img" aria-label="Gambar Placeholder untuk Company Profile"></div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-secondary mb-2 group-hover:text-primary transition duration-150">Company Profile Korporat</h3>
+                                <p class="text-gray-600 text-sm mb-4">Jenis: Company Profile | Klien: Konsultan Keuangan</p>
+                                <div class="flex space-x-3">
+                                    <a href="https://placehold.co/600x400/ffffff/3b82f6?text=Live+Demo+3" target="_blank" class="text-sm font-semibold text-white bg-primary hover:bg-primary-dark px-4 py-2 rounded-lg flex items-center cta-button">
+                                        <i data-lucide="external-link" class="w-4 h-4 mr-1"></i> Lihat Demo
+                                    </a>
+                                    <button onclick="showDetails('Project C: Company Profile', 'Website yang menunjukkan kredibilitas tinggi, menampilkan tim, layanan, dan kontak yang terstruktur.')" class="text-sm font-semibold text-secondary hover:text-primary border border-gray-300 px-4 py-2 rounded-lg flex items-center transition duration-150">
+                                        <i data-lucide="info" class="w-4 h-4 mr-1"></i> Detail Project
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Demo D: Simple Counter Tool (Existing) -->
+                        <div class="bg-gray-50 rounded-xl overflow-hidden shadow-xl card-hover-effect group">
+                            <div class="h-48 flex items-center justify-center bg-purple-100 transition-transform duration-300 group-hover:scale-[1.02]">
+                                <i data-lucide="plus-circle" class="w-12 h-12 text-purple-600"></i>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-secondary mb-2 group-hover:text-primary transition duration-150">Demo D: Simple Counter Tool</h3>
+                                <p class="text-gray-600 text-sm mb-4">Jenis: Interactive Demo | Fungsi: State Management Dasar</p>
+                                <div class="flex space-x-3">
+                                    <button onclick="showDetails('Project D: Simple Counter Tool', 'Demonstrasi manajemen state sederhana. Coba tombol di bawah ini!', 'counter')" class="text-sm font-semibold text-white bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg flex items-center cta-button">
+                                        <i data-lucide="play" class="w-4 h-4 mr-1"></i> Coba Demo Live
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Demo E: Random Color Generator (Existing) -->
+                        <div class="bg-gray-50 rounded-xl overflow-hidden shadow-xl card-hover-effect group">
+                            <div class="h-48 flex items-center justify-center bg-green-100 transition-transform duration-300 group-hover:scale-[1.02]">
+                                <i data-lucide="palette" class="w-12 h-12 text-green-600"></i>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-secondary mb-2 group-hover:text-primary transition duration-150">Demo E: Random Color Generator</h3>
+                                <p class="text-gray-600 text-sm mb-4">Jenis: Interactive Demo | Fungsi: Manipulasi DOM & Warna</p>
+                                <div class="flex space-x-3">
+                                    <button onclick="showDetails('Project E: Random Color Generator', 'Lihat bagaimana JavaScript dapat mengubah properti CSS secara dinamis. Klik tombol di bawah!', 'color-changer')" class="text-sm font-semibold text-white bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg flex items-center cta-button">
+                                        <i data-lucide="play" class="w-4 h-4 mr-1"></i> Coba Demo Live
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Harga / Paket (Existing) -->
+            <!-- ... section harga ... -->
+            <section id="harga" class="py-16 md:py-24 bg-gray-50">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-12">
+                        <span class="text-primary font-semibold uppercase tracking-wider mb-2 block">Investasi Terbaik</span>
+                        <h2 class="text-3xl md:text-4xl font-bold text-secondary">Pilih Paket yang Cocok untuk Anda</h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- Paket Basic -->
+                        <div class="bg-white p-8 rounded-xl shadow-xl card-hover-effect flex flex-col justify-between border-t-4 border-gray-300">
+                            <div>
+                                <h3 class="text-2xl font-bold text-secondary mb-2">Paket Basic</h3>
+                                <p class="text-gray-500 mb-4">Ideal untuk Personal Brand & Skripsi</p>
+                                <p class="text-4xl font-extrabold text-secondary mb-6">Rp 250 ribu</p>
+                                <ul class="space-y-3 text-gray-600">
+                                    <li class="flex items-center"><i data-lucide="check" class="w-5 h-5 mr-2 text-green-500"></i>1-3 Halaman Statis</li>
+                                    <li class="flex items-center"><i data-lucide="check" class="w-5 h-5 mr-2 text-green-500"></i>Desain Responsif</li>
+                                    <li class="flex items-center"><i data-lucide="check" class="w-5 h-5 mr-2 text-green-500"></i>SEO Dasar</li>
+                                    <li class="flex items-center"><i data-lucide="x" class="w-5 h-5 mr-2 text-red-500"></i>Tanpa CMS (Statik)</li>
+                                    <li class="flex items-center"><i data-lucide="x" class="w-5 h-5 mr-2 text-red-500"></i>Tanpa Support 24/7</li>
+                                </ul>
+                            </div>
+                            <a href="#kontak" class="mt-8 block text-center bg-gray-200 text-secondary hover:bg-gray-300 font-bold py-3 px-6 rounded-lg cta-button">Pilih Paket</a>
+                        </div>
+
+                        <!-- Paket Standard (Paling Populer) -->
+                        <div class="bg-white p-8 rounded-xl shadow-2xl card-hover-effect flex flex-col justify-between border-t-4 border-primary">
+                            <div class="text-center mb-4">
+                                <span class="inline-block bg-primary text-white text-xs font-semibold px-3 py-1 rounded-full uppercase">Paling Populer</span>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-secondary mb-2">Paket Standard</h3>
+                                <p class="text-gray-500 mb-4">Ideal untuk Company Profile & UMKM</p>
+                                <p class="text-5xl font-extrabold text-primary mb-6">Rp 350 ribu</p>
+                                <ul class="space-y-3 text-gray-600">
+                                    <li class="flex items-center"><i data-lucide="check" class="w-5 h-5 mr-2 text-green-500"></i>Hingga 7 Halaman</li>
+                                    <li class="flex items-center"><i data-lucide="check" class="w-5 h-5 mr-2 text-green-500"></i>**Sistem CMS Wordpress**</li>
+                                    <li class="flex items-center"><i data-lucide="check" class="w-5 h-5 mr-2 text-green-500"></i>Optimasi Kecepatan Penuh</li>
+                                    <li class="flex items-center"><i data-lucide="check" class="w-5 h-5 mr-2 text-green-500"></i>Gratis Revisi Mayor (2x)</li>
+                                    <li class="flex items-center"><i data-lucide="check" class="w-5 h-5 mr-2 text-green-500"></i>Support 1 Bulan Penuh</li>
+                                </ul>
+                            </div>
+                            <a href="#kontak" class="mt-8 block text-center bg-primary text-white hover:bg-primary-dark font-bold py-3 px-6 rounded-lg cta-button shadow-md">Pilih Paket Ini</a>
+                        </div>
+
+                        <!-- Paket Premium -->
+                        <div class="bg-white p-8 rounded-xl shadow-xl card-hover-effect flex flex-col justify-between border-t-4 border-gray-300">
+                            <div>
+                                <h3 class="text-2xl font-bold text-secondary mb-2">Paket Premium</h3>
+                                <p class="text-gray-500 mb-4">Ideal untuk Toko Online & Perusahaan</p>
+                                <p class="text-4xl font-extrabold text-secondary mb-6">Mulai Rp 450 ribu </p>
+                                <ul class="space-y-3 text-gray-600">
+                                    <li class="flex items-center"><i data-lucide="check" class="w-5 h-5 mr-2 text-green-500"></i>Halaman Tidak Terbatas</li>
+                                    <li class="flex items-center"><i data-lucide="check" class="w-5 h-5 mr-2 text-green-500"></i>**Integrasi E-commerce/API**</li>
+                                    <li class="flex items-center"><i data-lucide="check" class="w-5 h-5 mr-2 text-green-500"></i>SEO Lanjutan (Keyword Research)</li>
+                                    <li class="flex items-center"><i data-lucide="check" class="w-5 h-5 mr-2 text-green-500"></i>Gratis Revisi Minor Selamanya</li>
+                                    <li class="flex items-center"><i data-lucide="check" class="w-5 h-5 mr-2 text-green-500"></i>Support Premium 24/7</li>
+                                </ul>
+                            </div>
+                            <a href="#kontak" class="mt-8 block text-center bg-gray-200 text-secondary hover:bg-gray-300 font-bold py-3 px-6 rounded-lg cta-button">Pilih Paket</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. Keunggulan (Existing) -->
+            <!-- ... section keunggulan ... -->
+            <section id="keunggulan" class="py-16 md:py-24 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-12">
+                        <span class="text-primary font-semibold uppercase tracking-wider mb-2 block">Mengapa Memilih Kami?</span>
+                        <h2 class="text-3xl md:text-4xl font-bold text-secondary">Keunggulan Layanan Kami</h2>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <!-- Keunggulan 1 -->
+                        <div class="text-center p-6 rounded-xl border border-gray-100 hover:border-primary transition duration-300">
+                            <i data-lucide="smartphone" class="w-10 h-10 text-primary mx-auto mb-4"></i>
+                            <h3 class="text-xl font-bold text-secondary mb-2">100% Responsif</h3>
+                            <p class="text-gray-600 text-sm">Tampilan website sempurna di semua perangkat: HP, tablet, dan desktop.</p>
+                        </div>
+                        <!-- Keunggulan 2 -->
+                        <div class="text-center p-6 rounded-xl border border-gray-100 hover:border-primary transition duration-300">
+                            <i data-lucide="zap" class="w-10 h-10 text-primary mx-auto mb-4"></i>
+                            <h3 class="text-xl font-bold text-secondary mb-2">Cepat & Aman</h3>
+                            <p class="text-gray-600 text-sm">Optimasi performa untuk kecepatan loading maksimal dan keamanan data terjamin.</p>
+                        </div>
+                        <!-- Keunggulan 3 -->
+                        <div class="text-center p-6 rounded-xl border border-gray-100 hover:border-primary transition duration-300">
+                            <i data-lucide="search" class="w-10 h-10 text-primary mx-auto mb-4"></i>
+                            <h3 class="text-xl font-bold text-secondary mb-2">SEO Friendly</h3>
+                            <p class="text-gray-600 text-sm">Struktur kode dioptimasi agar mudah ditemukan oleh mesin pencari seperti Google.</p>
+                        </div>
+                        <!-- Keunggulan 4 -->
+                        <div class="text-center p-6 rounded-xl border border-gray-100 hover:border-primary transition duration-300">
+                            <i data-lucide="repeat" class="w-10 h-10 text-primary mx-auto mb-4"></i>
+                            <h3 class="text-xl font-bold text-secondary mb-2">Garansi Penuh</h3>
+                            <p class="text-gray-600 text-sm">Jaminan kepuasan dengan slot revisi dan dukungan teknis sesuai paket yang Anda pilih.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
             
-            <!-- Kartu Proyek 1: Chat App (Fungsional - Firestore Publik) -->
-            <div class="card bg-[#242442] p-4 rounded-xl shadow-xl transition duration-300 hover:scale-[1.02] cursor-pointer demo-button" data-target="chatInterface">
-                <div class="text-sm text-[#00f0b5] font-bold mb-1">Demo #1 | Real-time</div>
-                <h3 class="text-lg font-bold mb-2">Komunikasi Cepat</h3>
-                <p class="text-gray-400 mb-3 text-xs">Saluran Chat Publik Global.</p>
-                <div class="w-full text-center py-2 bg-[#00f0b5] text-gray-900 font-bold rounded-lg transition duration-200 hover:bg-[#28ff9a]">
-                    Akses Chat
-                </div>
-            </div>
-
-            <!-- Kartu Proyek 2: To-Do List (Fungsional - Firestore Private) -->
-            <div class="card bg-[#242442] p-4 rounded-xl shadow-xl transition duration-300 hover:scale-[1.02] cursor-pointer demo-button" data-target="todoInterface">
-                <div class="text-sm text-[#00f0b5] font-bold mb-1">Demo #2 | CRUD</div>
-                <h3 class="text-lg font-bold mb-2">Manajer Tugas</h3>
-                <p class="text-gray-400 mb-3 text-xs">Manajer Tugas Lintas Dimensi (Data Private).</p>
-                <div class="w-full text-center py-2 bg-[#00f0b5] text-gray-900 font-bold rounded-lg transition duration-200 hover:bg-[#28ff9a]">
-                    Buka Tugas
-                </div>
-            </div>
-
-            <!-- Kartu Proyek 3: Reaksi Game (Fungsional - JS Murni) -->
-            <div class="card bg-[#242442] p-4 rounded-xl shadow-xl transition duration-300 hover:scale-[1.02] cursor-pointer demo-button" data-target="gameInterface">
-                <div class="text-sm text-[#00f0b5] font-bold mb-1">Demo #3 | Interaktif</div>
-                <h3 class="text-lg font-bold mb-2">Game Uji Reaksi</h3>
-                <p class="text-gray-400 mb-3 text-xs">Uji kecepatan saraf Anda melawan waktu.</p>
-                <div class="w-full text-center py-2 bg-[#00f0b5] text-gray-900 font-bold rounded-lg transition duration-200 hover:bg-[#28ff9a]">
-                    Mulai Game
-                </div>
-            </div>
-            
-            <!-- Kartu Proyek 4: Kalkulator (Fungsional - JS Murni) -->
-            <div class="card bg-[#242442] p-4 rounded-xl shadow-xl transition duration-300 hover:scale-[1.02] cursor-pointer demo-button" data-target="calculatorInterface">
-                <div class="text-sm text-[#00f0b5] font-bold mb-1">Demo #4 | Utility</div>
-                <h3 class="text-lg font-bold mb-2">Kalkulator Cyberpunk</h3>
-                <p class="text-gray-400 mb-3 text-xs">Operasi Aritmatika dasar dengan UI futuristik.</p>
-                <div class="w-full text-center py-2 bg-[#00f0b5] text-gray-900 font-bold rounded-lg transition duration-200 hover:bg-[#28ff9a]">
-                    Akses Kalkulator
-                </div>
-            </div>
-
-            <!-- Kartu Proyek 5: Galeri/Animasi (Fungsional - CSS/UI) -->
-            <div class="card bg-[#242442] p-4 rounded-xl shadow-xl transition duration-300 hover:scale-[1.02] cursor-pointer demo-button" data-target="galeriInterface">
-                <div class="text-sm text-[#00f0b5] font-bold mb-1">Demo #5 | Visual</div>
-                <h3 class="text-lg font-bold mb-2">Galeri Seni Karakter</h3>
-                <p class="text-gray-400 mb-3 text-xs">Pameran efek visual dan desain UI/UX.</p>
-                <div class="w-full text-center py-2 bg-[#00f0b5] text-gray-900 font-bold rounded-lg transition duration-200 hover:bg-[#28ff9a]">
-                    Lihat Galeri
-                </div>
-            </div>
-        </div>
-        
-        <!-- === INTERFACES LIVE DEMO === -->
-        <div id="allInterfaces" class="relative">
-            <!-- Bagian untuk menampilkan Pesan Kesalahan/Status -->
-            <div id="statusMessage" class="hidden fixed top-0 left-0 right-0 p-4 text-center text-sm font-semibold rounded-lg z-50 transition duration-300"></div>
-
-            <!-- 1. CHAT INTERFACE -->
-            <div id="chatInterface" class="interface-panel hidden mt-8 bg-[#242442] p-6 rounded-xl shadow-2xl active">
-                <div class="flex justify-between items-center border-b border-[#00f0b5] pb-3 mb-4">
-                    <h3 class="text-2xl font-bold text-[#00f0b5]">Saluran Komunikasi Cepat</h3>
-                    <button class="text-gray-400 hover:text-white transition duration-200 close-button">
-                        <!-- SVG Close Icon -->
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                    </button>
-                </div>
-                <div id="messages" class="chat-box bg-[#1a1a2e] p-4 rounded-lg mb-4 border border-[#3e3e60]">
-                    <p class="text-center text-gray-500 italic" id="loadingChatStatus">Menghubungkan ke Saluran...</p>
-                </div>
-                <form id="messageForm" class="flex gap-2">
-                    <input type="text" id="messageInput" placeholder="Ketik pesan Anda di sini..." class="flex-grow p-3 rounded-lg bg-[#3e3e60] border border-[#00f0b5] text-white focus:outline-none focus:ring-2 focus:ring-[#00f0b5]" required />
-                    <button type="submit" class="bg-[#00f0b5] text-gray-900 font-bold p-3 rounded-lg transition duration-200 hover:bg-[#28ff9a] disabled:opacity-50" id="sendButton">Kirim</button>
-                </form>
-            </div>
-
-            <!-- 2. TODO LIST INTERFACE (Baru) -->
-            <div id="todoInterface" class="interface-panel hidden mt-8 bg-[#242442] p-6 rounded-xl shadow-2xl">
-                <div class="flex justify-between items-center border-b border-[#00f0b5] pb-3 mb-4">
-                    <h3 class="text-2xl font-bold text-[#00f0b5]">Manajer Tugas Lintas Dimensi (Private)</h3>
-                    <button class="text-gray-400 hover:text-white transition duration-200 close-button">
-                        <!-- SVG Close Icon -->
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                    </button>
-                </div>
-                <form id="todoForm" class="flex gap-2 mb-4">
-                    <input type="text" id="todoInput" placeholder="Tugas baru..." class="flex-grow p-3 rounded-lg bg-[#3e3e60] border border-[#00f0b5] text-white focus:outline-none focus:ring-2 focus:ring-[#00f0b5]" required />
-                    <button type="submit" class="bg-[#00f0b5] text-gray-900 font-bold p-3 rounded-lg transition duration-200 hover:bg-[#28ff9a]">Tambah Tugas</button>
-                </form>
-                <div id="taskList" class="h-64 overflow-y-auto bg-[#1a1a2e] p-4 rounded-lg border border-[#3e3e60]">
-                    <!-- Daftar Tugas akan dimuat di sini -->
-                    <p class="text-center text-gray-500 italic">Memuat tugas...</p>
-                </div>
-            </div>
-
-            <!-- 3. REACTION GAME INTERFACE (Baru) -->
-            <div id="gameInterface" class="interface-panel hidden mt-8 bg-[#242442] p-6 rounded-xl shadow-2xl text-center">
-                <div class="flex justify-between items-center border-b border-[#00f0b5] pb-3 mb-4">
-                    <h3 class="text-2xl font-bold text-[#00f0b5]">Game Uji Reaksi</h3>
-                    <button class="text-gray-400 hover:text-white transition duration-200 close-button">
-                         <!-- SVG Close Icon -->
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                    </button>
-                </div>
-                
-                <p id="gameStatus" class="text-lg font-semibold mb-4 text-yellow-300">Klik 'Mulai' untuk menguji reaksi Anda.</p>
-                <div id="reaction-area" class="bg-gray-700 text-white select-none">
-                    Tunggu Warna Hijau
-                </div>
-                <p id="resultText" class="text-2xl font-extrabold mt-4 text-[#00f0b5] min-h-[30px]">0 ms</p>
-                <button id="startGameButton" class="mt-4 py-2 px-6 bg-red-600 text-white font-bold rounded-lg transition duration-200 hover:bg-red-700">Mulai Ulang</button>
-            </div>
-
-             <!-- 4. CALCULATOR INTERFACE (Baru) -->
-            <div id="calculatorInterface" class="interface-panel hidden mt-8 bg-[#242442] p-6 rounded-xl shadow-2xl max-w-sm mx-auto">
-                <div class="flex justify-between items-center border-b border-[#00f0b5] pb-3 mb-4">
-                    <h3 class="text-2xl font-bold text-[#00f0b5]">Kalkulator Cyberpunk</h3>
-                    <button class="text-gray-400 hover:text-white transition duration-200 close-button">
-                        <!-- SVG Close Icon -->
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                    </button>
-                </div>
-                
-                <div id="display" class="bg-[#1a1a2e] text-right p-4 rounded-lg mb-4 text-3xl font-mono border border-[#00f0b5] min-h-[60px]">0</div>
-                
-                <div class="grid grid-cols-4 gap-3">
-                    <button class="calc-btn op-btn bg-gray-600 hover:bg-gray-500" data-value="AC">AC</button>
-                    <button class="calc-btn op-btn bg-gray-600 hover:bg-gray-500" data-value="DEL">DEL</button>
-                    <button class="calc-btn op-btn bg-[#00f0b5]/50 hover:bg-[#00f0b5]/70 text-gray-900" data-value="/">/</button>
-                    <button class="calc-btn op-btn bg-[#00f0b5]/50 hover:bg-[#00f0b5]/70 text-gray-900" data-value="*">*</button>
+            <!-- 6. Call To Action / Kontak (Form Terkirim Berfungsi) -->
+            <section id="kontak" class="py-16 md:py-24 bg-secondary text-white">
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Mari Mulai Proyek Impian Anda!</h2>
+                    <p class="text-xl text-gray-300 mb-10">Hubungi kami sekarang untuk konsultasi gratis dan penawaran terbaik.</p>
                     
-                    <button class="calc-btn num-btn" data-value="7">7</button>
-                    <button class="calc-btn num-btn" data-value="8">8</button>
-                    <button class="calc-btn num-btn" data-value="9">9</button>
-                    <button class="calc-btn op-btn bg-[#00f0b5]/50 hover:bg-[#00f0b5]/70 text-gray-900" data-value="-">-</button>
-                    
-                    <button class="calc-btn num-btn" data-value="4">4</button>
-                    <button class="calc-btn num-btn" data-value="5">5</button>
-                    <button class="calc-btn num-btn" data-value="6">6</button>
-                    <button class="calc-btn op-btn bg-[#00f0b5]/50 hover:bg-[#00f0b5]/70 text-gray-900" data-value="+">+</button>
-                    
-                    <button class="calc-btn num-btn" data-value="1">1</button>
-                    <button class="calc-btn num-btn" data-value="2">2</button>
-                    <button class="calc-btn num-btn" data-value="3">3</button>
-                    <button class="calc-btn eq-btn row-span-2 bg-[#00f0b5] hover:bg-[#28ff9a] text-gray-900" data-value="=">=</button>
-                    
-                    <button class="calc-btn num-btn col-span-2" data-value="0">0</button>
-                    <button class="calc-btn num-btn" data-value=".">.</button>
+                    <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                        <!-- Tombol WhatsApp -->
+                        <a href="https://wa.me/081934704296" target="_blank" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-8 rounded-lg shadow-lg cta-button flex items-center justify-center">
+                            <i data-lucide="message-circle" class="w-5 h-5 mr-2"></i> WhatsApp Sekarang
+                        </a>
+                        <!-- Tombol Email -->
+                        <a href="websitejasa13@gmail.com" class="bg-primary hover:bg-primary-dark text-white font-semibold py-3 px-8 rounded-lg shadow-lg cta-button flex items-center justify-center">
+                            <i data-lucide="mail" class="w-5 h-5 mr-2"></i> Kirim Email
+                        </a>
+                    </div>
+
+                    <!-- Form Kontak Sederhana (untuk demonstrasi) -->
+                    <div class="mt-12 p-8 bg-gray-800 rounded-xl shadow-lg">
+                        <h3 class="text-2xl font-bold mb-4">Atau Isi Form Singkat</h3>
+                        <form onsubmit="handleFormSubmit(event)">
+                            <input type="text" id="name" placeholder="Nama Anda" class="w-full p-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 mb-4 focus:ring-primary focus:border-primary border-gray-600" required>
+                            <input type="email" id="email" placeholder="Email Anda" class="w-full p-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 mb-4 focus:ring-primary focus:border-primary border-gray-600" required>
+                            <textarea id="message" placeholder="Pesan Anda" rows="4" class="w-full p-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 mb-6 focus:ring-primary focus:border-primary border-gray-600" required></textarea>
+                            <button type="submit" class="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3 px-6 rounded-lg cta-button">Kirim Permintaan</button>
+                        </form>
+                        <!-- Pesan konfirmasi/error akan muncul di sini -->
+                        <div id="form-message" class="mt-4 text-sm font-semibold text-white hidden"></div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- 7. Footer (Existing) -->
+        <footer class="bg-secondary text-white border-t border-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+                <div class="mt-10 pt-6 border-t border-gray-700 text-center text-sm text-gray-500">
+                    &copy; <span id="current-year"></span> WebPro Jasa Pembuatan Website. Hak Cipta Dilindungi.
                 </div>
             </div>
-
-            <!-- 5. GALERI / ANIMASI INTERFACE (Simple Demo) -->
-            <div id="galeriInterface" class="interface-panel hidden mt-8 bg-[#242442] p-6 rounded-xl shadow-2xl text-center">
-                <div class="flex justify-between items-center border-b border-[#00f0b5] pb-3 mb-4">
-                    <h3 class="text-2xl font-bold text-[#00f0b5]">Galeri Seni Karakter</h3>
-                    <button class="text-gray-400 hover:text-white transition duration-200 close-button">
-                        <!-- SVG Close Icon -->
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                    </button>
-                </div>
-                <div class="p-8 border-2 border-dashed border-[#00f0b5] rounded-xl relative overflow-hidden">
-                    <h4 class="text-3xl font-extrabold text-[#00f0b5] mb-4 z-10 relative">EFEK HOLOGRAFIK BERJALAN</h4>
-                    <p class="text-gray-400 mb-4 z-10 relative">Demo sederhana ini menampilkan efek animasi CSS murni (Placeholder Galeri Sesungguhnya).</p>
-                    <div class="absolute inset-0 bg-[#0d0d1a] opacity-80 z-0"></div>
-                    
-                    <!-- Animasi Garis Pindai (Scanline Effect) -->
-                    <div class="scanline-effect"></div>
-
-                    <div class="h-40 w-full bg-gradient-to-r from-transparent via-[#00f0b5]/50 to-transparent animate-pulse absolute top-0 left-0 right-0 z-10" 
-                        style="clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 100%);">
-                    </div>
-                    <div class="h-full w-40 bg-gradient-to-b from-transparent via-[#00f0b5]/50 to-transparent animate-spin-slow absolute top-0 left-1/2 -ml-20 z-10"></div>
-
-                    <button class="mt-6 py-2 px-6 bg-[#00f0b5] text-gray-900 font-bold rounded-lg transition duration-200 hover:bg-[#28ff9a] z-20 relative">
-                        Lihat Lebih Lanjut (Link Fiksi)
-                    </button>
-                </div>
-            </div>
-        </div>
-        <!-- === END INTERFACES LIVE DEMO === -->
-
-        <!-- FITUR BARU: LAYANAN & HARGA -->
-        <h2 id="pricing-section" class="text-3xl md:text-4xl font-extrabold mt-20 mb-8 border-l-4 border-[#00f0b5] pl-4 text-[#00f0b5]">
-            [LAYANAN & HARGA PENGEMBANGAN]
-        </h2>
-        <p class="text-center text-gray-400 mb-10 italic max-w-3xl mx-auto">
-            Pilih paket yang sesuai dengan kebutuhan proyek Anda. Harga mencerminkan kompleksitas fitur yang didemokan di atas.
-        </p>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            
-            <!-- PRICING CARD 1: PAKET DASAR (Utility/Game) -->
-            <div class="pricing-card">
-                <div>
-                    <div class="pricing-header">
-                        <h3 class="text-3xl font-extrabold text-white">PAKET DASAR</h3>
-                        <p class="text-sm text-gray-400 mt-1">Solusi Cepat & Sederhana</p>
-                    </div>
-                    <div class="price-tag mb-4">
-                        <span class="text-xl align-top text-gray-400">Rp</span>350
-                    </div>
-                    <p class="text-sm text-gray-300 mb-4">Cocok untuk proyek utilitas mandiri atau game sederhana, seperti demo Kalkulator dan Uji Reaksi.</p>
-                    <ul class="space-y-3 mb-8 text-sm">
-                        <li class="flex items-center"><span class="text-[#00f0b5] mr-2 text-xl">&#10003;</span> Desain UI Minimalis</li>
-                        <li class="flex items-center"><span class="text-[#00f0b5] mr-2 text-xl">&#10003;</span> Fungsionalitas Mandiri (Static/JS Murni)</li>
-                        <li class="flex items-center"><span class="text-[#00f0b5] mr-2 text-xl">&#10003;</span> 1x Revisi Desain</li>
-                        <li class="flex items-center text-gray-500"><span class="mr-2 text-xl opacity-50">&#10005;</span> Tidak ada Database (No CRUD)</li>
-                        <li class="flex items-center text-gray-500"><span class="mr-2 text-xl opacity-50">&#10005;</span> Tanpa Real-time</li>
-                    </ul>
-                </div>
-                <button onclick="scrollToContact()" class="w-full py-3 bg-[#00f0b5] text-gray-900 font-bold rounded-lg transition duration-300 hover:bg-[#28ff9a] mt-auto">
-                    Pesan Paket Ini
-                </button>
-            </div>
-
-            <!-- PRICING CARD 2: PAKET PREMIUM (Full Stack/Real-time) -->
-            <div class="pricing-card featured-card">
-                <div>
-                    <div class="pricing-header">
-                        <h3 class="text-3xl font-extrabold text-[#00f0b5]">PAKET PREMIUM</h3>
-                        <p class="text-sm text-yellow-300 mt-1 font-semibold">Rekomendasi Terbaik (Paling Populer)</p>
-                    </div>
-                    <div class="price-tag mb-4">
-                        <span class="text-xl align-top text-gray-400">Rp</span>550
-                    </div>
-                    <p class="text-sm text-gray-300 mb-4">Proyek dinamis dengan penyimpanan data dan interaksi real-time, seperti demo Chat dan To-Do List.</p>
-                    <ul class="space-y-3 mb-8 text-sm">
-                        <li class="flex items-center"><span class="text-yellow-300 mr-2 text-xl">&#10003;</span> Desain UI/UX Penuh</li>
-                        <li class="flex items-center"><span class="text-yellow-300 mr-2 text-xl">&#10003;</span> Fungsionalitas CRUD (Create, Read, Update, Delete)</li>
-                        <li class="flex items-center"><span class="text-yellow-300 mr-2 text-xl">&#10003;</span> Autentikasi Dasar Pengguna</li>
-                        <li class="flex items-center"><span class="text-yellow-300 mr-2 text-xl">&#10003;</span> Fitur Real-time (Sesuai Kebutuhan)</li>
-                        <li class="flex items-center"><span class="text-yellow-300 mr-2 text-xl">&#10003;</span> 3x Revisi Desain & Fitur</li>
-                    </ul>
-                </div>
-                <button onclick="scrollToContact()" class="w-full py-3 bg-yellow-500 text-gray-900 font-bold rounded-lg transition duration-300 hover:bg-yellow-400 mt-auto">
-                    Pesan Paket Ini
-                </button>
-            </div>
-
-            <!-- PRICING CARD 3: PAKET KUSTOM (Enterprise/Sistem) -->
-            <div class="pricing-card">
-                <div>
-                    <div class="pricing-header">
-                        <h3 class="text-3xl font-extrabold text-white">PAKET KUSTOM</h3>
-                        <p class="text-sm text-gray-400 mt-1">Solusi Skala Besar & Kompleks</p>
-                    </div>
-                    <div class="price-tag mb-4">
-                        <span class="text-xl align-top text-gray-400">Rp</span>Kutipan
-                    </div>
-                    <p class="text-sm text-gray-300 mb-4">Untuk proyek dengan logika bisnis yang sangat spesifik, integrasi API pihak ketiga, atau sistem manajemen konten (CMS) khusus.</p>
-                    <ul class="space-y-3 mb-8 text-sm">
-                        <li class="flex items-center"><span class="text-[#00f0b5] mr-2 text-xl">&#10003;</span> Arsitektur Berskala (Microservices/API)</li>
-                        <li class="flex items-center"><span class="text-[#00f0b5] mr-2 text-xl">&#10003;</span> Integrasi API Eksternal</li>
-                        <li class="flex items-center"><span class="text-[#00f0b5] mr-2 text-xl">&#10003;</span> Manajemen Proyek Khusus</li>
-                        <li class="flex items-center"><span class="text-[#00f0b5] mr-2 text-xl">&#10003;</span> Dukungan Penuh Pasca-Peluncuran</li>
-                        <li class="flex items-center"><span class="text-[#00f0b5] mr-2 text-xl">&#10003;</span> Revisi Tanpa Batas (Dalam Batasan Scope)</li>
-                    </ul>
-                </div>
-                <button onclick="scrollToContact()" class="w-full py-3 bg-[#3e3e60] text-white font-bold rounded-lg transition duration-300 hover:bg-[#5a5a78] mt-auto">
-                    Diskusikan Proyek
-                </button>
-            </div>
-        </div>
-
-        <!-- PEMISAH KONTAK -->
-        <h2 id="contact-section" class="text-3xl md:text-4xl font-extrabold mt-20 mb-8 border-l-4 border-yellow-500 pl-4 text-yellow-400">
-            [DASHBOARD KOMUNIKASI TERENKRIPSI]
-        </h2>
-
-        <!-- REVISI TOTAL: KONTAK TERENKRIPSI GAYA APLIKASI -->
-        <div id="contactTerminal" class="contact-dashboard max-w-4xl mx-auto">
-            <p class="text-center text-gray-400 mb-6 italic">Klik panel untuk menguraikan data dan menyalin informasi.</p>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                
-                <!-- Card 1: Email -->
-                <div id="cardEmail" class="contact-card group" onclick="ScrambleText('contactEmail')">
-                    <div class="flex items-center mb-4">
-                        <!-- Ikon Email (Surat) -->
-                        <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-17 4v7a2 2 0 002 2h14a2 2 0 002-2v-7m-17 0L12 16l-9-4"></path></svg>
-                        <h4 class="text-2xl font-bold ml-3 text-white group-hover:text-[#00f0b5] transition duration-200">EMAIL</h4>
-                    </div>
-                    <p class="text-gray-500 mb-2">Saluran Resmi Jaringan</p>
-                    <div class="text-sm">
-                        <span id="contactEmail" class="scramble" data-target-text="dullbibb@gmail.com">--ENCRYPTED--</span> 
-                    </div>
-                    <button onclick="event.stopPropagation(); copyToClipboard('contactEmail')" class="copy-btn mt-3 block w-full group-hover:bg-[#00f0b5] group-hover:text-gray-900 transition duration-200">
-                        Salin ke Clipboard
-                    </button>
-                </div>
-
-                <!-- Card 2: WhatsApp/Phone -->
-                <div id="cardPhone" class="contact-card group" onclick="ScrambleText('contactPhone')">
-                    <div class="flex items-center mb-4">
-                        <!-- Ikon Telepon/WhatsApp -->
-                        <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
-                        <h4 class="text-2xl font-bold ml-3 text-white group-hover:text-[#00f0b5] transition duration-200">WHATSAPP</h4>
-                    </div>
-                    <p class="text-gray-500 mb-2">Komunikasi Instan (Prioritas)</p>
-                    <div class="text-sm">
-                        <span id="contactPhone" class="scramble" data-target-text="081934704296">--ENCRYPTED--</span> 
-                    </div>
-                    <button onclick="event.stopPropagation(); copyToClipboard('contactPhone')" class="copy-btn mt-3 block w-full group-hover:bg-[#00f0b5] group-hover:text-gray-900 transition duration-200">
-                        Salin ke Clipboard
-                    </button>
-                </div>
-
-                <!-- Card 3: GitHub -->
-                <a id="cardGithubLink" href="https://github.com/DRKNETKING" target="_blank" class="contact-card group block">
-                    <div class="flex items-center mb-4">
-                        <!-- Ikon GitHub (Mirip Kucing/Octocat - diwakili oleh Ikon Code) -->
-                        <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
-                        <h4 class="text-2xl font-bold ml-3 text-white group-hover:text-[#00f0b5] transition duration-200">GITHUB</h4>
-                    </div>
-                    <p class="text-gray-500 mb-2">Akses Repositori Kode</p>
-                    <div class="text-sm">
-                         <span id="contactGithub" class="scramble text-xs" data-target-text="DRKNETKING/repo">--LINK-READY--</span>
-                    </div>
-                    <button class="copy-btn mt-3 block w-full bg-[#00f0b5] text-gray-900 font-bold hover:bg-[#28ff9a] transition duration-200">
-                        Buka Repositori
-                    </button>
-                </a>
-                <script>
-                    // Mengatasi isu Scramble pada link GitHub (untuk menghindari tampilan ganda)
-                    document.getElementById('cardGithubLink').onclick = function(e) {
-                         // Non-aktifkan scrambling pada klik tautan agar langsung membuka link
-                    };
-                </script>
-            </div>
-        </div>
-
-        <!-- Footer -->
-        <footer class="mt-20 border-t border-[#00f0b5]/30 pt-8 text-center text-gray-500">
-            <p>&copy; 2025 © Abdulhabib.
-Dibuat dengan dedikasi, kreativitas, dan kode yang rapi.
-Seluruh desain, konten, dan kode dalam portofolio ini dilindungi oleh hukum hak cipta.
-Dilarang menyalin, menyebarkan, atau memodifikasi tanpa izin dari pemilik.</p>
         </footer>
 
+    </div> <!-- End Main Content Wrapper -->
+
+    <!-- Modal for Project Details & Live Demos -->
+    <div id="detail-modal" class="fixed inset-0 bg-secondary bg-opacity-75 hidden items-center justify-center p-4 z-[100]">
+        <div class="bg-white p-6 rounded-xl shadow-2xl max-w-lg w-full transform transition-all duration-300 scale-95 opacity-0" id="modal-content-wrapper">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-2xl font-bold text-secondary" id="modal-title">Detail Proyek</h3>
+                <button onclick="closeModal()" class="text-gray-400 hover:text-gray-700">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <p id="modal-body" class="text-gray-600 mb-4"></p>
+            
+            <!-- Area Khusus Demo Interaktif -->
+            <div id="interactive-demo-area" class="mt-4 p-4 border rounded-lg bg-gray-50 hidden">
+                <h4 class="font-semibold text-secondary mb-3">Live Demo:</h4>
+                <!-- Konten demo akan disuntikkan di sini -->
+            </div>
+
+            <button onclick="closeModal()" class="w-full mt-4 bg-primary hover:bg-primary-dark text-white font-semibold py-2 rounded-lg">Tutup</button>
+        </div>
     </div>
 
-    <!-- SCRIPT JAVASCRIPT & FIREBASE -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, query, onSnapshot, serverTimestamp, setLogLevel, updateDoc, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        // Variabel global untuk inisialisasi Firebase
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-        
-        let db = null;
-        let auth = null;
-        let userId = null;
-        let username = 'Anonim_Anime'; 
-        let isAuthReady = false;
-
-        // Logging Firebase (untuk debugging)
-        setLogLevel('Debug');
-        
-        // Elemen UI Global
-        const statusMessage = document.getElementById('statusMessage');
-
-        // Fungsi untuk scroll ke bagian kontak
-        window.scrollToContact = function() {
-            document.getElementById('contact-section').scrollIntoView({ behavior: 'smooth' });
-        }
-        
-        // Fungsi untuk scroll ke bagian harga
-        window.scrollToPricing = function() {
-            document.getElementById('pricing-section').scrollIntoView({ behavior: 'smooth' });
-        }
-
-
-        // Fungsi untuk menampilkan pesan status yang bagus
-        function showStatus(message, type = 'success') {
-            statusMessage.textContent = message;
-            statusMessage.classList.remove('hidden', 'bg-green-700', 'bg-red-700', 'bg-yellow-700', 'text-white', 'text-yellow-100');
-            if (type === 'success') {
-                statusMessage.classList.add('bg-green-700', 'text-white');
-            } else if (type === 'error') {
-                statusMessage.classList.add('bg-red-700', 'text-white');
-            } else {
-                 statusMessage.classList.add('bg-yellow-700', 'text-yellow-100');
-            }
-            statusMessage.classList.add('block');
-            setTimeout(() => {
-                statusMessage.classList.remove('block');
-                statusMessage.classList.add('hidden');
-            }, 3000);
-        }
-        
-        // Fungsi untuk menyalin teks ke clipboard (digunakan di terminal kontak)
-        window.copyToClipboard = function(elementId) {
-            const element = document.getElementById(elementId);
-            const textToCopy = element.getAttribute('data-target-text') || element.textContent;
-            
-            if (textToCopy === '--ENCRYPTED--' || textToCopy === '--LINK-READY--') {
-                showStatus("Silakan klik kartu untuk menguraikan data terlebih dahulu!", 'error');
-                return;
-            }
-
-            // Menggunakan execCommand karena navigator.clipboard mungkin tidak berfungsi di iframe
-            const textarea = document.createElement('textarea');
-            textarea.value = textToCopy;
-            document.body.appendChild(textarea);
-            textarea.select();
-            try {
-                const successful = document.execCommand('copy');
-                if (successful) {
-                    showStatus("Teks berhasil disalin ke clipboard!", 'success');
-                    // Efek visual pada tombol
-                    const button = element.closest('.contact-card').querySelector('.copy-btn');
-                    if (button) {
-                        button.textContent = 'DATA BERHASIL DISALIN!';
-                        setTimeout(() => button.textContent = 'Salin ke Clipboard', 1500);
-                    }
-                } else {
-                    throw new Error("Copy failed");
-                }
-            } catch (err) {
-                console.error('Gagal menyalin:', err);
-                showStatus("Gagal menyalin. Silakan salin manual.", 'error');
-            }
-            document.body.removeChild(textarea);
-        }
-
-        // --- FUNGSI UTAMA FIREBASE & AUTENTIKASI ---
-        async function initializeFirebase() {
-            try {
-                const app = initializeApp(firebaseConfig);
-                auth = getAuth(app);
-                db = getFirestore(app);
-
-                // 1. Autentikasi Pengguna
-                if (initialAuthToken) {
-                    await signInWithCustomToken(auth, initialAuthToken);
-                } else {
-                    await signInAnonymously(auth);
-                }
-
-                // 2. Listener Status Autentikasi
-                onAuthStateChanged(auth, (user) => {
-                    if (user) {
-                        userId = user.uid;
-                        // Atur username default
-                        username = 'Kreator-' + userId.substring(0, 4); 
-                        isAuthReady = true;
-                        
-                        document.getElementById('user-info-display').innerHTML = `Anda masuk sebagai: <span class="font-semibold text-[#00f0b5]">${username}</span> (ID: ${userId.substring(0, 10)}...)`;
-                        
-                        // Setelah Auth siap, mulai dengarkan pesan jika interface aktif
-                        document.querySelectorAll('.interface-panel.active').forEach(panel => {
-                            if (panel.id === 'chatInterface') listenForMessages();
-                            if (panel.id === 'todoInterface') listenForTasks();
-                        });
-
-                    } else {
-                        console.error("Autentikasi gagal.");
-                        isAuthReady = true;
-                    }
-                });
-
-            } catch (error) {
-                console.error("Kesalahan inisialisasi Firebase:", error);
-                isAuthReady = true;
-            }
-        }
-
-        // --- FUNGSI JAM DAN TANGGAL FUTURISTIK ---
-        function updateDateTime() {
-            const now = new Date();
-            
-            // Format waktu (HH:MM:SS)
-            const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
-            const timeString = now.toLocaleTimeString('id-ID', timeOptions);
-            
-            // Format tanggal (Hari, DD Bulan YYYY)
-            const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            const dateString = now.toLocaleDateString('id-ID', dateOptions);
-
-            document.getElementById('currentTime').textContent = timeString;
-            document.getElementById('currentDate').textContent = `[ ${dateString.toUpperCase()} ]`;
-        }
-
-        // --- FUNGSI SCRAMBLE TEXT (KONTAK) ---
-        function ScrambleText(elementId) {
-            const element = document.getElementById(elementId);
-            const targetText = element.getAttribute('data-target-text');
-            const originalText = element.textContent;
-            
-            if (!targetText) return;
-
-            // Logika khusus untuk GitHub agar tidak ter-scramble jika sudah diuraikan
-            if (elementId === 'contactGithub') {
-                 if (originalText !== '--LINK-READY--') {
-                    element.textContent = '--LINK-READY--';
-                 } else {
-                    // Jika diklik saat --LINK-READY--, tidak perlu di scramble
-                 }
-                 return;
-            }
-
-            const chars = '!@#$%^&*()_+{}|:"<>?~`-=/\\[];\',./';
-            let frame = 0;
-            const maxFrames = 30; // Durasi animasi
-
-            // Jika sudah diuraikan, scramble kembali ke --ENCRYPTED--
-            if (originalText !== '--ENCRYPTED--') {
-                 // Langsung kembali ke terenkripsi tanpa animasi
-                 element.textContent = '--ENCRYPTED--';
-                 return;
-            }
-
-            // Fungsi untuk mendapatkan karakter acak
-            const randomChar = () => chars[Math.floor(Math.random() * chars.length)];
-
-            const interval = setInterval(() => {
-                let scrambledText = '';
-                const progress = frame / maxFrames;
-
-                for (let i = 0; i < targetText.length; i++) {
-                    const threshold = progress + (i / targetText.length) * 0.5;
-
-                    if (Math.random() > threshold) {
-                        scrambledText += randomChar();
-                    } else {
-                        scrambledText += targetText[i];
-                    }
-                }
-
-                element.textContent = scrambledText;
-
-                if (frame > maxFrames) {
-                    clearInterval(interval);
-                    element.textContent = targetText;
-                }
-
-                frame++;
-            }, 50);
-        }
-
-
-        // --- FUNGSI CHAT FIREBASE (Demo #1) ---
-        function listenForMessages() {
-            if (!isAuthReady || !userId) return;
-
-            const messagesContainer = document.getElementById('messages');
-            const chatCollectionPath = `artifacts/${appId}/public/data/chat_messages`;
-            const q = query(collection(db, chatCollectionPath));
-
-            messagesContainer.innerHTML = '<p class="text-center text-gray-500 italic">Memuat pesan...</p>';
-
-            onSnapshot(q, (snapshot) => {
-                const messagesData = [];
-                snapshot.forEach((doc) => {
-                    messagesData.push({ id: doc.id, ...doc.data() });
-                });
-                
-                messagesData.sort((a, b) => (a.timestamp?.toMillis() || 0) - (b.timestamp?.toMillis() || 0));
-
-                messagesContainer.innerHTML = ''; 
-                messagesData.forEach((message) => {
-                    const isUser = message.userId === userId;
-                    const messageElement = document.createElement('div');
-                    
-                    let time = message.timestamp && message.timestamp.toDate ? message.timestamp.toDate().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) : 'Sekarang';
-
-                    messageElement.className = `flex ${isUser ? 'justify-end' : 'justify-start'}`;
-                    messageElement.innerHTML = `
-                        <div class="message-bubble ${isUser ? 'user-message' : 'other-message'} shadow-md">
-                            <span class="font-bold ${isUser ? 'text-gray-800' : 'text-[#00f0b5]'} text-xs">${isUser ? 'Anda' : message.username || 'Anonim'}</span>
-                            <p class="text-sm break-words">${message.text}</p>
-                            <span class="block text-right text-xs ${isUser ? 'text-gray-600' : 'text-gray-400'} mt-1">${time}</span>
-                        </div>
-                    `;
-                    messagesContainer.appendChild(messageElement);
-                });
-
-                messagesContainer.scrollTop = messagesContainer.scrollHeight;
-
-            }, (error) => {
-                console.error("Error mendengarkan pesan:", error);
-                showStatus("Gagal memuat pesan chat. Cek koneksi atau izin.", 'error');
-            });
-        }
-
-        async function sendMessage(text) {
-            if (!isAuthReady || !userId || !db) {
-                showStatus("Sistem Chat belum siap. Tunggu autentikasi.", 'error');
-                return;
-            }
-            const chatCollectionPath = `artifacts/${appId}/public/data/chat_messages`;
-            try {
-                await addDoc(collection(db, chatCollectionPath), {
-                    userId: userId,
-                    username: username,
-                    text: text,
-                    timestamp: serverTimestamp()
-                });
-            } catch (e) {
-                showStatus("Error saat mengirim pesan. Coba lagi.", 'error');
-            }
-        }
-
-
-        // --- FUNGSI TODO LIST FIREBASE (Demo #2) ---
-        const todoCollectionPath = () => `artifacts/${appId}/users/${userId}/todo_tasks`;
-
-        function listenForTasks() {
-            if (!isAuthReady || !userId) return;
-            const taskList = document.getElementById('taskList');
-            const q = query(collection(db, todoCollectionPath()));
-
-            onSnapshot(q, (snapshot) => {
-                const tasks = [];
-                snapshot.forEach((doc) => {
-                    tasks.push({ id: doc.id, ...doc.data() });
-                });
-                
-                tasks.sort((a, b) => (a.createdAt?.toMillis() || 0) - (b.createdAt?.toMillis() || 0));
-
-                taskList.innerHTML = ''; 
-                if (tasks.length === 0) {
-                    taskList.innerHTML = '<p class="text-center text-gray-500 italic mt-4">Tidak ada tugas! Tambahkan tugas pertama Anda.</p>';
-                    return;
-                }
-
-                tasks.forEach(task => {
-                    const taskEl = document.createElement('div');
-                    taskEl.className = 'flex justify-between items-center p-3 mb-2 rounded-lg transition duration-200 border border-[#3e3e60] ' + (task.completed ? 'bg-green-900/40 opacity-70' : 'bg-[#3e3e60] hover:bg-[#5a5a78]');
-                    
-                    taskEl.innerHTML = `
-                        <span class="flex-grow ${task.completed ? 'line-through text-gray-400' : 'text-white'} text-sm">${task.text}</span>
-                        <div class="flex space-x-2">
-                            <button data-id="${task.id}" class="toggle-complete text-[#00f0b5] hover:text-[#28ff9a] disabled:opacity-50" title="Selesai">
-                                ${task.completed ? 
-                                    '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>' : 
-                                    '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>'}
-                            </button>
-                            <button data-id="${task.id}" class="delete-task text-red-500 hover:text-red-700 disabled:opacity-50" title="Hapus">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-                            </button>
-                        </div>
-                    `;
-                    taskList.appendChild(taskEl);
-                });
-            }, (error) => {
-                console.error("Error mendengarkan tugas:", error);
-                showStatus("Gagal memuat tugas. Cek koneksi.", 'error');
-            });
-        }
-
-        async function addTask(text) {
-            if (!isAuthReady || !userId || !db) {
-                showStatus("Sistem Tugas belum siap. Tunggu autentikasi.", 'error');
-                return;
-            }
-            try {
-                await addDoc(collection(db, todoCollectionPath()), {
-                    text: text,
-                    completed: false,
-                    createdAt: serverTimestamp()
-                });
-                showStatus("Tugas berhasil ditambahkan.");
-            } catch (e) {
-                showStatus("Error saat menambah tugas. Coba lagi.", 'error');
-            }
-        }
-
-        async function toggleTaskComplete(taskId, completed) {
-            if (!isAuthReady || !userId || !db) return;
-            try {
-                await updateDoc(doc(db, todoCollectionPath(), taskId), {
-                    completed: !completed
-                });
-                showStatus(completed ? "Tugas ditandai BELUM selesai." : "Tugas ditandai SELESAI.");
-            } catch (e) {
-                showStatus("Error saat memperbarui tugas.", 'error');
-            }
-        }
-
-        async function deleteTask(taskId) {
-            if (!isAuthReady || !userId || !db) return;
-            try {
-                await deleteDoc(doc(db, todoCollectionPath(), taskId));
-                showStatus("Tugas berhasil dihapus.");
-            } catch (e) {
-                showStatus("Error saat menghapus tugas.", 'error');
-            }
-        }
-
-        // --- FUNGSI REACTION GAME (Demo #3) ---
-        let gameActive = false;
-        let startTime = 0;
-        let timeoutId = null;
-
-        function startGame() {
-            const area = document.getElementById('reaction-area');
-            const status = document.getElementById('gameStatus');
-            const result = document.getElementById('resultText');
-            
-            // Reset state
-            gameActive = false;
-            result.textContent = '0 ms';
-            area.style.backgroundColor = '#d32f2f'; // Merah
-            area.textContent = 'Klik untuk Batalkan';
-            status.textContent = 'Tunggu sampai warna berubah menjadi HIJAU...';
-            area.onclick = cancelGame;
-            document.getElementById('startGameButton').style.backgroundColor = '#d32f2f'; // Merah
-            document.getElementById('startGameButton').textContent = 'RESET';
-
-            // Atur waktu tunggu acak (2 hingga 5 detik)
-            const waitTime = Math.random() * 3000 + 2000; 
-
-            timeoutId = setTimeout(() => {
-                area.style.backgroundColor = '#388e3c'; // Hijau
-                area.textContent = 'KLIK SEKARANG!';
-                status.textContent = '!!! KLIK CEPAT !!!';
-                gameActive = true;
-                startTime = performance.now();
-                area.onclick = recordReaction;
-            }, waitTime);
-        }
-
-        function cancelGame() {
-            clearTimeout(timeoutId);
-            const area = document.getElementById('reaction-area');
-            const status = document.getElementById('gameStatus');
-            const result = document.getElementById('resultText');
-
-            area.style.backgroundColor = '#1a1a2e'; // Hitam
-            area.textContent = 'Anda terlalu Cepat! Coba lagi.';
-            status.textContent = 'Reaksi dibatalkan. Coba Lagi.';
-            result.textContent = 'Gagal';
-            area.onclick = () => {}; // Non-aktifkan area klik 
-            document.getElementById('startGameButton').style.backgroundColor = '#00f0b5'; // Hijau
-            document.getElementById('startGameButton').textContent = 'Mulai Ulang';
-        }
-
-        function recordReaction() {
-            if (!gameActive) {
-                cancelGame(); // Jika diklik sebelum hijau
-                return;
-            }
-            const endTime = performance.now();
-            const reactionTime = (endTime - startTime).toFixed(3);
-            
-            const area = document.getElementById('reaction-area');
-            const status = document.getElementById('gameStatus');
-            const result = document.getElementById('resultText');
-            
-            area.style.backgroundColor = '#1a1a2e'; // Hitam
-            area.textContent = 'Selesai!';
-            status.textContent = 'Reaksi Anda Tercatat:';
-            result.textContent = `${reactionTime} ms`;
-            gameActive = false;
-            area.onclick = () => {}; // Non-aktifkan area klik 
-            document.getElementById('startGameButton').style.backgroundColor = '#00f0b5'; // Hijau
-            document.getElementById('startGameButton').textContent = 'Mulai Ulang';
-        }
-
-
-        // --- FUNGSI CALCULATOR (Demo #4) ---
-        let displayValue = '0';
-        let firstOperand = null;
-        let operator = null;
-        let waitingForSecondOperand = false;
-
-        function updateCalculatorDisplay() {
-            const display = document.getElementById('display');
-            display.textContent = displayValue;
-        }
-
-        function inputDigit(digit) {
-            if (waitingForSecondOperand === true) {
-                displayValue = digit;
-                waitingForSecondOperand = false;
-            } else {
-                displayValue = displayValue === '0' ? digit : displayValue + digit;
-            }
-            updateCalculatorDisplay();
-        }
-
-        function inputDecimal(dot) {
-            if (waitingForSecondOperand === true) {
-                displayValue = '0.';
-                waitingForSecondOperand = false;
-                return;
-            }
-            if (!displayValue.includes(dot)) {
-                displayValue += dot;
-            }
-            updateCalculatorDisplay();
-        }
-        
-        // Fungsi untuk menghitung ekspresi
-        function evaluate(first, second, op) {
-            first = parseFloat(first);
-            second = parseFloat(second);
-            if (isNaN(first) || isNaN(second)) return NaN;
-            switch (op) {
-                case '+': return first + second;
-                case '-': return first - second;
-                case '*': return first * second;
-                case '/': return first / second;
-                default: return second;
-            }
-        }
-
-        function handleOperator(nextOperator) {
-            const inputValue = parseFloat(displayValue);
-
-            if (operator && waitingForSecondOperand)  {
-                // Jika operator baru ditekan sebelum operand kedua, ganti operator
-                operator = nextOperator;
-                return;
-            }
-
-            if (firstOperand === null) {
-                firstOperand = inputValue;
-            } else if (operator) {
-                // Lakukan perhitungan sebelumnya
-                const result = evaluate(firstOperand, inputValue, operator);
-                
-                // Jika hasilnya terlalu panjang, gunakan notasi eksponensial
-                displayValue = String(result).length > 12 ? result.toExponential(5) : String(result);
-                firstOperand = result;
-            }
-            
-            waitingForSecondOperand = true;
-            if (nextOperator !== '=') {
-                operator = nextOperator;
-            } else {
-                operator = null;
-            }
-            updateCalculatorDisplay();
-        }
-
-        function resetCalculator() {
-            displayValue = '0';
-            firstOperand = null;
-            operator = null;
-            waitingForSecondOperand = false;
-            updateCalculatorDisplay();
-        }
-
-        // --- LOGIKA UTAMA APLIKASI DAN LOADING SCREEN ---
-
+    <!-- JavaScript untuk interaktivitas -->
+    <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const loadingScreen = document.getElementById('loading-screen');
-            const mainContent = document.getElementById('main-content');
-            
-            // Waktu minimum loading: 6 detik (6000ms)
-            const minLoadTime = 6000; 
+            lucide.createIcons();
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+            setupClockMarkings();
+        });
 
-            // Elemen UI
-            const demoButtons = document.querySelectorAll('.demo-button');
-            const closeButtons = document.querySelectorAll('.close-button');
-            const chatForm = document.getElementById('messageForm');
-            const chatInput = document.getElementById('messageInput');
-            const todoForm = document.getElementById('todoForm');
-            const todoInput = document.getElementById('todoInput');
-            const taskList = document.getElementById('taskList');
-            const startGameButton = document.getElementById('startGameButton');
-            const reactionArea = document.getElementById('reaction-area');
-            const calculatorDiv = document.getElementById('calculatorInterface');
-            const scrambleElements = document.querySelectorAll('.scramble');
+        // =======================================================
+        // 1. Loading Screen Logic (5 detik)
+        // =======================================================
+        const LOADING_DURATION_MS = 5000;
+        const loadingScreen = document.getElementById('loading-screen');
+        const mainContent = document.getElementById('main-content');
+        
+        window.onload = function() {
+            setTimeout(() => {
+                loadingScreen.style.opacity = '0';
+                mainContent.style.opacity = '1';
 
-            // Set interval untuk Jam dan Tanggal
-            updateDateTime(); 
-            setInterval(updateDateTime, 1000); 
-
-            // Listener untuk Scramble Text
-            scrambleElements.forEach(element => {
-                element.addEventListener('click', (e) => {
-                    // Mencegah klik pada elemen scramble di dalam link GitHub agar tidak double-trigger
-                    if (element.closest('#cardGithubLink')) return;
-                    ScrambleText(element.id);
-                    e.stopPropagation(); // Mencegah event card parent
-                });
-            });
-
-
-            // --- Logika Loading Screen BARU ---
-            function hideLoadingScreen() {
                 setTimeout(() => {
-                    loadingScreen.classList.add('loading-hidden');
-                    setTimeout(() => {
-                        mainContent.classList.add('content-visible');
-                        document.body.style.overflow = 'auto'; // Aktifkan scroll
-                    }, 700); 
+                    loadingScreen.style.display = 'none';
+                }, 1000); // Tunggu transisi opacity
+            }, LOADING_DURATION_MS);
+        }
 
-                }, minLoadTime);
+        // =======================================================
+        // 2. Analog Clock Logic
+        // =======================================================
+        const analogClock = document.getElementById('analog-clock');
+        const hourHand = document.getElementById('hour-hand');
+        const minuteHand = document.getElementById('minute-hand');
+        const secondHand = document.getElementById('second-hand');
+        const digitalDate = document.getElementById('digital-date');
+        const digitalTime = document.getElementById('digital-time');
+
+        function setupClockMarkings() {
+            const clockSize = 90;
+            const radius = clockSize / 2;
+            const numbers = [12, 3, 6, 9];
+            numbers.forEach((num, index) => {
+                const angle = index * 90; 
+                const radian = (angle - 90) * (Math.PI / 180);
+                const x = radius + radius * 0.7 * Math.cos(radian);
+                const y = radius + radius * 0.7 * Math.sin(radian);
+
+                const numEl = document.createElement('div');
+                numEl.className = 'clock-number';
+                numEl.textContent = num;
+                numEl.style.top = `${y}px`;
+                numEl.style.left = `${x}px`;
+                analogClock.appendChild(numEl);
+            });
+        }
+
+        function updateClock() {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+
+            const hourDegree = (hours % 12 + minutes / 60) * 30; 
+            const minuteDegree = (minutes + seconds / 60) * 6; 
+            const secondDegree = seconds * 6; 
+
+            hourHand.style.transform = `translate(-50%, 0) rotate(${hourDegree}deg)`;
+            minuteHand.style.transform = `translate(-50%, 0) rotate(${minuteDegree}deg)`;
+            secondHand.style.transform = `translate(-50%, 0) rotate(${secondDegree}deg)`;
+            
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const formattedDate = now.toLocaleDateString('id-ID', options);
+            digitalDate.textContent = formattedDate;
+
+            const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            const formattedTime = now.toLocaleTimeString('id-ID', timeOptions);
+            digitalTime.textContent = formattedTime;
+        }
+
+        updateClock();
+        setInterval(updateClock, 1000);
+
+
+        // =======================================================
+        // 3. Modal Logic & Interactive Demos
+        // =======================================================
+        const detailModal = document.getElementById('detail-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalBody = document.getElementById('modal-body');
+        const modalContentWrapper = document.getElementById('modal-content-wrapper');
+        const demoArea = document.getElementById('interactive-demo-area');
+
+        // Global state container for all demos to prevent collisions
+        window.demoState = {
+            counter: 0,
+            calculator: { display: '0', currentOperand: null, previousOperand: null, operation: null, resetDisplay: false },
+            typingTest: { text: "Kecepatan adalah inti dari pengalaman web yang unggul. Kami membangun situs yang tidak hanya terlihat profesional, tetapi juga memiliki waktu muat yang sangat cepat, memberikan kepuasan maksimal kepada pengunjung Anda. Uji kemampuan Anda di sini!", isStarted: false, startTime: 0, interval: null, errorCount: 0, charIndex: 0 },
+            todoList: [],
+            quotes: [
+                { quote: "Desain bukanlah hanya tentang tampilan dan rasa. Desain adalah tentang bagaimana ia bekerja.", author: "Steve Jobs" },
+                { quote: "Fokus pada pengguna dan sisanya akan mengikuti.", author: "Larry Page" },
+                { quote: "Kesederhanaan adalah kecanggihan tertinggi.", author: "Leonardo da Vinci" },
+                { quote: "Kode yang bersih terlihat seperti prosa yang ditulis dengan baik.", author: "Robert C. Martin" }
+            ],
+            quiz: {
+                questions: [
+                    { q: "Apa nama framework CSS yang digunakan di situs ini?", options: ["Bootstrap", "Foundation", "Tailwind CSS", "Materialize"], answer: 2 },
+                    { q: "Untuk apa Canvas API digunakan?", options: ["Menggambar Grafis 2D/3D", "Menyimpan Data Lokal", "Mengakses Kamera", "Mencetak Dokumen"], answer: 0 },
+                    { q: "Berapa lama waktu muat (loading) yang diatur pada portofolio ini?", options: ["2 detik", "5 detik", "10 detik", "Tidak ada"], answer: 1 }
+                ],
+                currentQuestionIndex: 0,
+                score: 0
             }
-            window.addEventListener('load', hideLoadingScreen);
+        };
 
+        function showDetails(title, description, demoType = null) {
+            modalTitle.textContent = title;
+            modalBody.textContent = description;
             
-            // --- Logika Navigasi Antarmuka (Panel) ---
+            demoArea.innerHTML = '<h4 class="font-semibold text-secondary mb-3">Live Demo:</h4>';
+            demoArea.classList.add('hidden');
             
-            function showInterface(targetId) {
-                document.querySelectorAll('.interface-panel').forEach(panel => {
-                    panel.classList.add('hidden');
-                    panel.classList.remove('active');
-                });
-
-                const targetPanel = document.getElementById(targetId);
-                if (targetPanel) {
-                    targetPanel.classList.remove('hidden');
-                    targetPanel.classList.add('active');
-
-                    // Panggil listener yang sesuai
-                    if (targetId === 'chatInterface' && isAuthReady) listenForMessages();
-                    if (targetId === 'todoInterface' && isAuthReady) listenForTasks();
-                    if (targetId === 'gameInterface') {
-                        // Inisialisasi/Reset game saat dibuka
-                        startGameButton.click(); 
-                    }
-                    if (targetId === 'calculatorInterface') {
-                         resetCalculator();
-                    }
-                }
+            // Hentikan interval demo lama
+            if (window.demoState.typingTest.interval) {
+                clearInterval(window.demoState.typingTest.interval);
+                window.demoState.typingTest.interval = null;
             }
-            
-            // Memastikan KARTU Proyek BISA DIKLIK (Fungsi Akses Portofolio Profesional)
-            demoButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    showInterface(button.dataset.target);
-                });
-            });
 
-            closeButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    button.closest('.interface-panel').classList.add('hidden');
-                    button.closest('.interface-panel').classList.remove('active');
-                });
-            });
 
-            // --- Event Listener Demo #1 (Chat) ---
-            chatForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const messageText = chatInput.value.trim();
-                if (messageText) {
-                    sendMessage(messageText);
-                    chatInput.value = ''; 
-                }
-            });
-
-            // --- Event Listener Demo #2 (To-Do List) ---
-            todoForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const taskText = todoInput.value.trim();
-                if (taskText && isAuthReady) {
-                    addTask(taskText);
-                    todoInput.value = ''; 
-                } else if (!isAuthReady) {
-                    showStatus("Tunggu autentikasi selesai untuk menyimpan tugas.", 'error');
-                }
-            });
-
-            taskList.addEventListener('click', (e) => {
-                const target = e.target.closest('button');
-                if (!target) return;
-
-                const taskId = target.dataset.id;
+            if (demoType) {
+                demoArea.classList.remove('hidden');
                 
-                if (target.classList.contains('delete-task')) {
-                    deleteTask(taskId);
-                } else if (target.classList.contains('toggle-complete')) {
-                    // Mendapatkan status 'completed' dari task (dengan mencari di elemen induk)
-                    const taskElement = target.closest('div.flex');
-                    const taskTextElement = taskElement.querySelector('span');
-                    const isCompleted = taskTextElement.classList.contains('line-through');
-                    toggleTaskComplete(taskId, isCompleted);
+                // --- Inject Demo Content ---
+                if (demoType === 'counter') {
+                    injectCounterDemo();
+                } else if (demoType === 'color-changer') {
+                    injectColorChangerDemo();
+                } else if (demoType === 'calculator') {
+                    injectCalculatorDemo();
+                } else if (demoType === 'typing-test') {
+                    injectTypingTestDemo();
+                } else if (demoType === 'todo-list') {
+                    injectTodoListDemo();
+                } else if (demoType === 'quote-generator') {
+                    injectQuoteGeneratorDemo();
+                } else if (demoType === 'simple-quiz') {
+                    injectSimpleQuizDemo();
                 }
-            });
+            }
 
-            // --- Event Listener Demo #3 (Reaction Game) ---
-            startGameButton.addEventListener('click', () => {
-                startGame();
-            });
-            reactionArea.onclick = () => {
-                if (gameActive) recordReaction();
-                else cancelGame(); // Jika klik saat merah
-            };
+            detailModal.classList.remove('hidden');
+            detailModal.classList.add('flex');
             
-            // Set up awal untuk tombol game
-            document.getElementById('startGameButton').style.backgroundColor = '#00f0b5'; 
-            document.getElementById('startGameButton').textContent = 'Mulai';
+            // Animasi masuk
+            setTimeout(() => {
+                modalContentWrapper.classList.remove('scale-95', 'opacity-0');
+                modalContentWrapper.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
 
-            // --- Event Listener Demo #4 (Calculator) ---
-            calculatorDiv.addEventListener('click', (e) => {
-                if (e.target.matches('button.calc-btn')) {
-                    const { value } = e.target.dataset;
+        function closeModal() {
+            // Animasi keluar
+            modalContentWrapper.classList.remove('scale-100', 'opacity-100');
+            modalContentWrapper.classList.add('scale-95', 'opacity-0');
+            
+            // Bersihkan interval jika demo typing test aktif
+            if (window.demoState.typingTest.interval) {
+                clearInterval(window.demoState.typingTest.interval);
+                window.demoState.typingTest.interval = null;
+            }
 
-                    if (value === 'AC') {
-                        resetCalculator();
-                    } else if (value === 'DEL') {
-                        // Memastikan DEL berfungsi bahkan pada string notasi eksponensial
-                        if (displayValue.includes('e')) {
-                            resetCalculator(); // Reset jika notasi eksponensial
-                        } else {
-                            displayValue = displayValue.substring(0, displayValue.length - 1) || '0';
-                        }
-                        updateCalculatorDisplay();
-                    } else if (value === '.') {
-                        inputDecimal(value);
-                    } else if (value === '=' || value === '+' || value === '-' || value === '*' || value === '/') {
-                        handleOperator(value);
+            setTimeout(() => {
+                detailModal.classList.add('hidden');
+                detailModal.classList.remove('flex');
+            }, 300);
+        }
+        
+        // --- Interaktif Demo Functions ---
+
+        // Demo D: Counter (Existing)
+        function injectCounterDemo() {
+            demoArea.innerHTML += `
+                <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-inner">
+                    <span id="counter-value" class="text-4xl font-extrabold text-primary mb-4">${window.demoState.counter}</span>
+                    <div class="flex space-x-4">
+                        <button onclick="changeCounter(-1)" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg">- Kurangi</button>
+                        <button onclick="changeCounter(1)" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg">+ Tambah</button>
+                    </div>
+                </div>
+            `;
+        }
+        function changeCounter(amount) {
+            window.demoState.counter += amount;
+            document.getElementById('counter-value').textContent = window.demoState.counter;
+        }
+
+        // Demo E: Color Changer (Existing)
+        function injectColorChangerDemo() {
+            demoArea.innerHTML += `
+                <div class="flex flex-col items-center p-4">
+                    <div id="color-box" class="w-32 h-32 rounded-lg shadow-lg mb-4 transition-all duration-500" style="background-color: #3b82f6;"></div>
+                    <button onclick="changeColor()" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg">Ganti Warna Random</button>
+                </div>
+            `;
+        }
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+        function changeColor() {
+            const colorBox = document.getElementById('color-box');
+            if (colorBox) {
+                colorBox.style.backgroundColor = getRandomColor();
+            }
+        }
+        
+        // Demo G: Kalkulator (NEW)
+        function injectCalculatorDemo() {
+            // Reset calculator state on modal open
+            window.demoState.calculator = { display: '0', currentOperand: null, previousOperand: null, operation: null, resetDisplay: false };
+
+            demoArea.innerHTML += `
+                <div class="p-4 bg-gray-100 rounded-lg shadow-md max-w-xs mx-auto">
+                    <div id="calc-display" class="bg-white text-right text-3xl font-bold p-3 mb-2 rounded-lg shadow-inner overflow-hidden" style="min-height: 50px;">0</div>
+                    <div class="calculator-grid">
+                        <button onclick="calculatorClear()" class="calc-btn col-span-2 bg-red-400 hover:bg-red-500 text-white">AC</button>
+                        <button onclick="calculatorOperation('/')" class="calc-btn calc-op">/</button>
+                        <button onclick="calculatorOperation('*')" class="calc-btn calc-op">*</button>
+                        <button onclick="calculatorAppend(7)" class="calc-btn">7</button>
+                        <button onclick="calculatorAppend(8)" class="calc-btn">8</button>
+                        <button onclick="calculatorAppend(9)" class="calc-btn">9</button>
+                        <button onclick="calculatorOperation('-')" class="calc-btn calc-op">-</button>
+                        <button onclick="calculatorAppend(4)" class="calc-btn">4</button>
+                        <button onclick="calculatorAppend(5)" class="calc-btn">5</button>
+                        <button onclick="calculatorAppend(6)" class="calc-btn">6</button>
+                        <button onclick="calculatorOperation('+')" class="calc-btn calc-op">+</button>
+                        <button onclick="calculatorAppend(1)" class="calc-btn">1</button>
+                        <button onclick="calculatorAppend(2)" class="calc-btn">2</button>
+                        <button onclick="calculatorAppend(3)" class="calc-btn">3</button>
+                        <button onclick="calculatorEquals()" class="calc-btn calc-op row-span-2">=</button>
+                        <button onclick="calculatorAppend(0)" class="calc-btn col-span-2">0</button>
+                        <button onclick="calculatorAppend('.')" class="calc-btn">.</button>
+                    </div>
+                </div>
+            `;
+        }
+        function updateCalcDisplay() {
+            document.getElementById('calc-display').textContent = window.demoState.calculator.display;
+        }
+        function calculatorAppend(number) {
+            const calc = window.demoState.calculator;
+            if (calc.resetDisplay) {
+                calc.display = String(number);
+                calc.resetDisplay = false;
+            } else if (calc.display === '0') {
+                calc.display = String(number);
+            } else if (number === '.' && calc.display.includes('.')) {
+                return; 
+            } else {
+                calc.display += String(number);
+            }
+            updateCalcDisplay();
+        }
+        function calculatorOperation(op) {
+            const calc = window.demoState.calculator;
+            if (calc.currentOperand == null) {
+                calc.currentOperand = parseFloat(calc.display);
+            } else if (calc.previousOperand != null) {
+                calculatorCompute();
+            }
+            calc.operation = op;
+            calc.previousOperand = calc.currentOperand;
+            calc.currentOperand = null;
+            calc.resetDisplay = true;
+        }
+        function calculatorCompute() {
+            const calc = window.demoState.calculator;
+            if (calc.operation == null || calc.previousOperand == null) return;
+
+            const current = parseFloat(calc.display);
+            const prev = calc.previousOperand;
+            let result;
+
+            switch (calc.operation) {
+                case '+': result = prev + current; break;
+                case '-': result = prev - current; break;
+                case '*': result = prev * current; break;
+                case '/': 
+                    if (current === 0) {
+                        result = "Error"; 
                     } else {
-                        inputDigit(value);
+                        result = prev / current;
+                    }
+                    break;
+                default: return;
+            }
+
+            calc.display = String(result);
+            calc.currentOperand = result;
+            calc.previousOperand = null;
+            calc.operation = null;
+            calc.resetDisplay = true;
+            updateCalcDisplay();
+        }
+        function calculatorEquals() {
+            calculatorCompute();
+            window.demoState.calculator.previousOperand = null;
+        }
+        function calculatorClear() {
+            window.demoState.calculator = { display: '0', currentOperand: null, previousOperand: null, operation: null, resetDisplay: false };
+            updateCalcDisplay();
+        }
+
+        // Demo H: Typing Test (NEW)
+        function injectTypingTestDemo() {
+            // Reset state
+            const state = window.demoState.typingTest;
+            if (state.interval) clearInterval(state.interval);
+            Object.assign(state, { isStarted: false, startTime: 0, interval: null, errorCount: 0, charIndex: 0 });
+
+            const text = state.text.split('').map((char, index) => 
+                `<span id="char-${index}">${char}</span>`
+            ).join('');
+
+            demoArea.innerHTML += `
+                <div class="p-4 bg-white rounded-lg shadow-md">
+                    <div id="typing-text-area" class="text-lg mb-4 p-3 border rounded-lg bg-gray-100">${text}</div>
+                    <textarea id="typing-input" rows="3" class="w-full p-3 border rounded-lg focus:ring-primary focus:border-primary" placeholder="Mulai mengetik di sini..." oninput="processTypingInput(this.value)" disabled></textarea>
+                    <div class="flex justify-between items-center mt-4">
+                        <button id="start-typing-btn" onclick="startTypingTest()" class="bg-primary hover:bg-primary-dark text-white font-bold py-2 px-4 rounded-lg">Mulai Tes</button>
+                        <div class="text-sm font-semibold text-secondary">
+                            <span id="typing-timer">Waktu: 0s</span> | 
+                            <span id="typing-wpm">WPM: 0</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.getElementById(`char-0`).classList.add('bg-yellow-300'); // Highlight first char
+        }
+        function startTypingTest() {
+            const state = window.demoState.typingTest;
+            document.getElementById('typing-input').value = '';
+            document.getElementById('typing-input').disabled = false;
+            document.getElementById('typing-input').focus();
+            document.getElementById('start-typing-btn').textContent = 'Menguji...';
+            document.getElementById('start-typing-btn').disabled = true;
+
+            state.isStarted = true;
+            state.startTime = Date.now();
+            state.errorCount = 0;
+            state.charIndex = 0;
+            
+            // Start timer
+            state.interval = setInterval(() => {
+                const elapsed = Math.floor((Date.now() - state.startTime) / 1000);
+                document.getElementById('typing-timer').textContent = `Waktu: ${elapsed}s`;
+            }, 1000);
+        }
+        function processTypingInput(inputValue) {
+            const state = window.demoState.typingTest;
+            if (!state.isStarted) return;
+            
+            const fullText = state.text;
+            const inputLength = inputValue.length;
+            const targetChar = fullText[inputLength - 1];
+            const typedChar = inputValue[inputLength - 1];
+
+            // Color highlighting for previous character
+            if (inputLength > 0) {
+                const prevTarget = document.getElementById(`char-${inputLength - 1}`);
+                if (prevTarget) {
+                    prevTarget.classList.remove('bg-yellow-300', 'text-red-500');
+                    if (prevTarget.textContent === typedChar) {
+                        prevTarget.classList.add('text-green-600');
+                    } else {
+                        prevTarget.classList.add('text-red-500');
+                        state.errorCount++;
                     }
                 }
-            });
+            }
+
+            // Highlight current character
+            const nextTarget = document.getElementById(`char-${inputLength}`);
+            if (nextTarget) {
+                nextTarget.classList.add('bg-yellow-300');
+            }
+
+            // Update WPM
+            const elapsedSeconds = (Date.now() - state.startTime) / 1000;
+            const wordsTyped = inputLength / 5; // Standard word length assumption
+            const wpm = elapsedSeconds > 0 ? Math.round((wordsTyped / elapsedSeconds) * 60) : 0;
+            document.getElementById('typing-wpm').textContent = `WPM: ${wpm}`;
+
+            // Check for completion
+            if (inputLength === fullText.length) {
+                endTypingTest();
+            }
+        }
+        function endTypingTest() {
+            const state = window.demoState.typingTest;
+            clearInterval(state.interval);
+            state.isStarted = false;
+            document.getElementById('typing-input').disabled = true;
+
+            const finalTime = Math.floor((Date.now() - state.startTime) / 1000);
+            const wordsTyped = state.text.length / 5;
+            const finalWPM = Math.round((wordsTyped / finalTime) * 60);
+
+            const resultText = `Tes Selesai! Waktu: ${finalTime}s, WPM Akhir: ${finalWPM}, Kesalahan: ${state.errorCount}.`;
+            
+            document.getElementById('start-typing-btn').textContent = 'Mulai Lagi';
+            document.getElementById('start-typing-btn').disabled = false;
+            document.getElementById('typing-wpm').textContent = resultText;
+        }
+
+        // Demo I: To-Do List (NEW)
+        function injectTodoListDemo() {
+            window.demoState.todoList = []; // Reset list
+
+            demoArea.innerHTML += `
+                <div class="p-4 bg-white rounded-lg shadow-md">
+                    <div class="flex mb-4">
+                        <input type="text" id="todo-input" class="flex-grow p-2 border rounded-l-lg focus:ring-teal-500 focus:border-teal-500" placeholder="Tambahkan tugas baru..." onkeypress="if(event.key === 'Enter') addTodo()">
+                        <button onclick="addTodo()" class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded-r-lg">Tambah</button>
+                    </div>
+                    <ul id="todo-list" class="space-y-2">
+                        <!-- Items will be injected here -->
+                    </ul>
+                </div>
+            `;
+        }
+        function renderTodoList() {
+            const listElement = document.getElementById('todo-list');
+            if (!listElement) return;
+
+            listElement.innerHTML = window.demoState.todoList.map((item, index) => `
+                <li class="flex items-center justify-between p-3 bg-gray-100 rounded-lg shadow-sm ${item.completed ? 'line-through opacity-60' : ''}">
+                    <span class="flex-grow cursor-pointer" onclick="toggleTodo(${index})">
+                        ${item.text}
+                    </span>
+                    <button onclick="deleteTodo(${index})" class="text-red-500 hover:text-red-700 ml-3">
+                        <i data-lucide="trash-2" class="w-4 h-4"></i>
+                    </button>
+                </li>
+            `).join('');
+            lucide.createIcons(); // Re-render icons after adding new HTML
+        }
+        function addTodo() {
+            const input = document.getElementById('todo-input');
+            const text = input.value.trim();
+
+            if (text) {
+                window.demoState.todoList.push({ text, completed: false });
+                input.value = '';
+                renderTodoList();
+            }
+        }
+        function toggleTodo(index) {
+            window.demoState.todoList[index].completed = !window.demoState.todoList[index].completed;
+            renderTodoList();
+        }
+        function deleteTodo(index) {
+            window.demoState.todoList.splice(index, 1);
+            renderTodoList();
+        }
 
 
-            // Mulai inisialisasi Firebase segera
-            initializeFirebase();
+        // Demo J: Quote Generator (NEW)
+        function injectQuoteGeneratorDemo() {
+            demoArea.innerHTML += `
+                <div class="p-6 bg-white rounded-lg shadow-md text-center">
+                    <div id="quote-display" class="text-xl italic text-gray-700 mb-4 min-h-[80px] flex items-center justify-center">
+                        Klik tombol di bawah untuk mendapatkan kutipan inspiratif!
+                    </div>
+                    <div id="quote-author" class="text-sm font-semibold text-rose-600 mb-6">-</div>
+                    <button onclick="generateQuote()" class="bg-rose-500 hover:bg-rose-600 text-white font-bold py-2 px-6 rounded-lg">
+                        <i data-lucide="refresh-cw" class="w-4 h-4 mr-2 inline-block"></i> Kutipan Baru
+                    </button>
+                </div>
+            `;
+        }
+        function generateQuote() {
+            const quotes = window.demoState.quotes;
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            const quote = quotes[randomIndex];
+
+            document.getElementById('quote-display').textContent = `"${quote.quote}"`;
+            document.getElementById('quote-author').textContent = `- ${quote.author}`;
+            lucide.createIcons();
+        }
+
+        // Demo K: Simple Quiz (NEW)
+        function injectSimpleQuizDemo() {
+            // Reset quiz state
+            window.demoState.quiz.currentQuestionIndex = 0;
+            window.demoState.quiz.score = 0;
+            
+            demoArea.innerHTML += `
+                <div class="p-6 bg-white rounded-lg shadow-md">
+                    <div id="quiz-container">
+                        <!-- Questions/Results will be injected here -->
+                    </div>
+                    <div id="quiz-message" class="mt-4 text-sm font-semibold text-green-600"></div>
+                </div>
+            `;
+            renderQuizQuestion();
+        }
+        function renderQuizQuestion() {
+            const quiz = window.demoState.quiz;
+            const container = document.getElementById('quiz-container');
+            if (!container) return;
+
+            if (quiz.currentQuestionIndex >= quiz.questions.length) {
+                // Show results
+                container.innerHTML = `
+                    <h3 class="text-2xl font-bold text-primary mb-4">Hasil Kuis Anda</h3>
+                    <p class="text-xl">Anda mendapatkan <span class="text-green-600 font-extrabold">${quiz.score}</span> dari ${quiz.questions.length} jawaban benar!</p>
+                    <button onclick="injectSimpleQuizDemo()" class="mt-4 bg-primary hover:bg-primary-dark text-white font-bold py-2 px-4 rounded-lg">Ulangi Kuis</button>
+                `;
+                return;
+            }
+
+            const currentQ = quiz.questions[quiz.currentQuestionIndex];
+            const qNum = quiz.currentQuestionIndex + 1;
+
+            container.innerHTML = `
+                <h3 class="text-lg font-semibold text-secondary mb-2">Pertanyaan ${qNum} dari ${quiz.questions.length}:</h3>
+                <p class="text-xl font-bold mb-4">${currentQ.q}</p>
+                <div class="space-y-3" id="options-list">
+                    ${currentQ.options.map((opt, index) => `
+                        <button onclick="checkAnswer(${index})" class="w-full text-left p-3 border border-gray-300 rounded-lg hover:bg-primary hover:text-white transition duration-150 bg-gray-50 text-secondary">
+                            ${index + 1}. ${opt}
+                        </button>
+                    `).join('')}
+                </div>
+            `;
+            document.getElementById('quiz-message').textContent = '';
+        }
+        function checkAnswer(selectedIndex) {
+            const quiz = window.demoState.quiz;
+            const currentQ = quiz.questions[quiz.currentQuestionIndex];
+            const messageElement = document.getElementById('quiz-message');
+            const optionsList = document.getElementById('options-list');
+            const isCorrect = selectedIndex === currentQ.answer;
+
+            if (isCorrect) {
+                quiz.score++;
+                messageElement.textContent = 'Jawaban Benar! 🎉';
+                messageElement.classList.replace('text-red-500', 'text-green-600');
+            } else {
+                messageElement.textContent = 'Jawaban Salah. Jawaban yang benar adalah ' + currentQ.options[currentQ.answer] + '.';
+                messageElement.classList.replace('text-green-600', 'text-red-500');
+            }
+            
+            // Disable all buttons after selecting
+            Array.from(optionsList.querySelectorAll('button')).forEach(btn => btn.disabled = true);
+
+            // Move to next question after delay
+            setTimeout(() => {
+                quiz.currentQuestionIndex++;
+                renderQuizQuestion();
+            }, 1500);
+        }
+        
+        // Form Submission Handler (Dummy - Berfungsi Terkirim)
+        function handleFormSubmit(event) {
+            event.preventDefault(); 
+            const name = document.getElementById('name').value;
+            const message = document.getElementById('form-message');
+
+            message.classList.remove('hidden', 'text-red-500');
+            message.classList.add('text-green-400');
+            message.textContent = `Terima kasih, ${name}! Pesan Anda telah kami terima. Kami akan segera menghubungi Anda dalam 1x24 jam kerja.`;
+
+            // Reset form and hide message after 3 seconds
+            setTimeout(() => {
+                event.target.reset();
+                message.classList.add('hidden');
+            }, 4000);
+        }
+        
+        // Mobile Menu Toggle (Existing)
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => { mobileMenu.classList.add('hidden'); });
         });
     </script>
 </body>
