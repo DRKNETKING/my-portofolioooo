@@ -447,7 +447,447 @@
                     </div>
                 </div>
             </section>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arcade Mini Games</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f0f2f5;
+        }
 
+        .game-card:hover {
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+
+        /* Snake Styles */
+        #snake-canvas {
+            background-color: #1a1a1a;
+            border: 4px solid #333;
+            max-width: 100%;
+        }
+
+        /* Memory Game Styles */
+        .card {
+            perspective: 1000px;
+            cursor: pointer;
+        }
+        .card-inner {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+        .card-front, .card-back {
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+        .card-back {
+            transform: rotateY(180deg);
+        }
+
+        /* Mole Styles */
+        .hole {
+            position: relative;
+            overflow: hidden;
+        }
+        .mole {
+            position: absolute;
+            bottom: -100%;
+            transition: bottom 0.2s;
+        }
+        .mole.up {
+            bottom: 10%;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-indigo-600 text-white p-6 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold flex items-center gap-2">
+                <i class="fas fa-gamepad"></i> GameHub Demo
+            </h1>
+            <nav>
+                <button onclick="showHome()" class="hover:text-indigo-200 transition">Beranda</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+        
+        <!-- Home Section -->
+        <div id="home-section" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Game 1: Quiz -->
+            <div onclick="startQuiz()" class="game-card bg-white p-6 rounded-2xl shadow-md cursor-pointer border-b-4 border-blue-500">
+                <div class="text-blue-500 text-4xl mb-4"><i class="fas fa-question-circle"></i></div>
+                <h2 class="text-xl font-bold mb-2">Quiz ABC</h2>
+                <p class="text-gray-600 text-sm">Uji pengetahuanmu dengan pilihan ganda seru!</p>
+            </div>
+
+            <!-- Game 2: Memory -->
+            <div onclick="startMemory()" class="game-card bg-white p-6 rounded-2xl shadow-md cursor-pointer border-b-4 border-purple-500">
+                <div class="text-purple-500 text-4xl mb-4"><i class="fas fa-brain"></i></div>
+                <h2 class="text-xl font-bold mb-2">Memory Match</h2>
+                <p class="text-gray-600 text-sm">Cari pasangan kartu yang sama secepat mungkin.</p>
+            </div>
+
+            <!-- Game 3: Snake -->
+            <div onclick="startSnake()" class="game-card bg-white p-6 rounded-2xl shadow-md cursor-pointer border-b-4 border-green-500">
+                <div class="text-green-500 text-4xl mb-4"><i class="fas fa-snake"></i></div>
+                <h2 class="text-xl font-bold mb-2">Classic Snake</h2>
+                <p class="text-gray-600 text-sm">Bantu ular makan apel tanpa menabrak dinding.</p>
+            </div>
+
+            <!-- Game 4: Whack-a-Mole -->
+            <div onclick="startMole()" class="game-card bg-white p-6 rounded-2xl shadow-md cursor-pointer border-b-4 border-red-500">
+                <div class="text-red-500 text-4xl mb-4"><i class="fas fa-hammer"></i></div>
+                <h2 class="text-xl font-bold mb-2">Pukul Tikus</h2>
+                <p class="text-gray-600 text-sm">Ketangkasan memukul tikus yang muncul tiba-tiba.</p>
+            </div>
+        </div>
+
+        <!-- Game Container -->
+        <div id="game-container" class="hidden max-w-2xl mx-auto bg-white p-6 rounded-3xl shadow-2xl relative">
+            <button onclick="showHome()" class="absolute -top-4 -right-4 bg-red-500 text-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <!-- Quiz View -->
+            <div id="quiz-view" class="hidden">
+                <div class="mb-4 flex justify-between items-center">
+                    <span id="quiz-progress" class="text-sm font-semibold text-gray-500">Soal 1/5</span>
+                    <span id="quiz-timer" class="bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-sm font-bold">15s</span>
+                </div>
+                <h3 id="quiz-question" class="text-2xl font-bold mb-6">Pertanyaan di sini?</h3>
+                <div id="quiz-options" class="space-y-3">
+                    <!-- Options inject via JS -->
+                </div>
+            </div>
+
+            <!-- Memory View -->
+            <div id="memory-view" class="hidden">
+                <div class="flex justify-between mb-4">
+                    <div class="font-bold">Skor: <span id="memory-score">0</span></div>
+                    <div class="font-bold text-indigo-600">Waktu: <span id="memory-timer">0</span>s</div>
+                </div>
+                <div id="memory-grid" class="grid grid-cols-4 gap-2 h-96">
+                    <!-- Cards inject via JS -->
+                </div>
+            </div>
+
+            <!-- Snake View -->
+            <div id="snake-view" class="hidden text-center">
+                <div class="mb-2 font-bold text-xl">Skor: <span id="snake-score">0</span></div>
+                <canvas id="snake-canvas" width="400" height="400" class="mx-auto rounded-lg"></canvas>
+                <div class="mt-4 grid grid-cols-3 gap-2 max-w-[150px] mx-auto">
+                    <div></div><button onclick="changeDir('up')" class="p-4 bg-gray-200 rounded-lg"><i class="fas fa-arrow-up"></i></button><div></div>
+                    <button onclick="changeDir('left')" class="p-4 bg-gray-200 rounded-lg"><i class="fas fa-arrow-left"></i></button>
+                    <button onclick="changeDir('down')" class="p-4 bg-gray-200 rounded-lg"><i class="fas fa-arrow-down"></i></button>
+                    <button onclick="changeDir('right')" class="p-4 bg-gray-200 rounded-lg"><i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- Whack-a-Mole View -->
+            <div id="mole-view" class="hidden">
+                <div class="flex justify-between mb-6">
+                    <div class="text-xl font-bold">Skor: <span id="mole-score">0</span></div>
+                    <div class="text-xl font-bold text-red-600">Waktu: <span id="mole-timer">30</span>s</div>
+                </div>
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="hole h-24 bg-amber-800 rounded-full border-4 border-amber-900 shadow-inner"><div class="mole text-4xl text-center w-full">🐹</div></div>
+                    <div class="hole h-24 bg-amber-800 rounded-full border-4 border-amber-900 shadow-inner"><div class="mole text-4xl text-center w-full">🐹</div></div>
+                    <div class="hole h-24 bg-amber-800 rounded-full border-4 border-amber-900 shadow-inner"><div class="mole text-4xl text-center w-full">🐹</div></div>
+                    <div class="hole h-24 bg-amber-800 rounded-full border-4 border-amber-900 shadow-inner"><div class="mole text-4xl text-center w-full">🐹</div></div>
+                    <div class="hole h-24 bg-amber-800 rounded-full border-4 border-amber-900 shadow-inner"><div class="mole text-4xl text-center w-full">🐹</div></div>
+                    <div class="hole h-24 bg-amber-800 rounded-full border-4 border-amber-900 shadow-inner"><div class="mole text-4xl text-center w-full">🐹</div></div>
+                </div>
+            </div>
+
+            <!-- Game Over Screen -->
+            <div id="game-over" class="hidden text-center py-10">
+                <div class="text-6xl mb-4 text-yellow-500"><i class="fas fa-trophy"></i></div>
+                <h2 class="text-3xl font-bold mb-2">Permainan Berakhir!</h2>
+                <p class="text-xl mb-6 text-gray-600">Skor Akhir Kamu: <span id="final-score" class="font-bold text-indigo-600">0</span></p>
+                <button onclick="showHome()" class="bg-indigo-600 text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-indigo-700 transition">Main Game Lain</button>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // Global UI Controller
+        const homeSection = document.getElementById('home-section');
+        const gameContainer = document.getElementById('game-container');
+        const views = ['quiz-view', 'memory-view', 'snake-view', 'mole-view', 'game-over'];
+
+        function hideAllViews() {
+            views.forEach(v => document.getElementById(v).classList.add('hidden'));
+        }
+
+        function showHome() {
+            homeSection.classList.remove('hidden');
+            gameContainer.classList.add('hidden');
+            clearIntervals();
+        }
+
+        function showView(viewId) {
+            homeSection.classList.add('hidden');
+            gameContainer.classList.remove('hidden');
+            hideAllViews();
+            document.getElementById(viewId).classList.remove('hidden');
+        }
+
+        let gameIntervals = [];
+        function clearIntervals() {
+            gameIntervals.forEach(clearInterval);
+            gameIntervals = [];
+        }
+
+        // --- GAME 1: QUIZ ---
+        const quizData = [
+            { q: "Apa ibukota Indonesia?", a: ["Jakarta", "Surabaya", "Bandung", "Medan"], c: 0 },
+            { q: "Planet terdekat dari Matahari adalah?", a: ["Venus", "Bumi", "Mars", "Merkurius"], c: 3 },
+            { q: "Siapa penemu lampu pijar?", a: ["Einstein", "Newton", "Thomas Alva Edison", "Tesla"], c: 2 },
+            { q: "Mata uang Jepang adalah?", a: ["Won", "Yuan", "Ringgit", "Yen"], c: 3 },
+            { q: "Hewan tercepat di darat adalah?", a: ["Kuda", "Cheetah", "Singa", "Elang"], c: 1 }
+        ];
+
+        let currentQuizIdx = 0;
+        let quizScore = 0;
+        let quizTimer;
+
+        function startQuiz() {
+            showView('quiz-view');
+            currentQuizIdx = 0;
+            quizScore = 0;
+            loadQuiz();
+        }
+
+        function loadQuiz() {
+            if (currentQuizIdx >= quizData.length) {
+                endGame(quizScore);
+                return;
+            }
+            const data = quizData[currentQuizIdx];
+            document.getElementById('quiz-progress').innerText = `Soal ${currentQuizIdx + 1}/${quizData.length}`;
+            document.getElementById('quiz-question').innerText = data.q;
+            const optionsDiv = document.getElementById('quiz-options');
+            optionsDiv.innerHTML = '';
+            
+            data.a.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-4 rounded-xl border-2 border-gray-100 hover:border-indigo-500 hover:bg-indigo-50 transition font-medium flex justify-between";
+                btn.innerHTML = `<span>${opt}</span> <i class="fas fa-chevron-right opacity-0"></i>`;
+                btn.onclick = () => checkQuiz(idx);
+                optionsDiv.appendChild(btn);
+            });
+            
+            let timeLeft = 10;
+            document.getElementById('quiz-timer').innerText = `${timeLeft}s`;
+            clearInterval(quizTimer);
+            quizTimer = setInterval(() => {
+                timeLeft--;
+                document.getElementById('quiz-timer').innerText = `${timeLeft}s`;
+                if (timeLeft <= 0) {
+                    clearInterval(quizTimer);
+                    checkQuiz(-1);
+                }
+            }, 1000);
+            gameIntervals.push(quizTimer);
+        }
+
+        function checkQuiz(idx) {
+            clearInterval(quizTimer);
+            if (idx === quizData[currentQuizIdx].c) quizScore += 20;
+            currentQuizIdx++;
+            setTimeout(loadQuiz, 500);
+        }
+
+        // --- GAME 2: MEMORY MATCH ---
+        let memoryCards = [];
+        let flippedCards = [];
+        let memoryScore = 0;
+        let memoryTime = 0;
+        let memoryTimer;
+
+        function startMemory() {
+            showView('memory-view');
+            memoryScore = 0;
+            memoryTime = 0;
+            document.getElementById('memory-score').innerText = '0';
+            const icons = ['🍎', '🍌', '🍇', '🍉', '🍒', '🍓', '🍍', '🥝'];
+            const gameIcons = [...icons, ...icons].sort(() => Math.random() - 0.5);
+            
+            const grid = document.getElementById('memory-grid');
+            grid.innerHTML = '';
+            gameIcons.forEach((icon, idx) => {
+                const card = document.createElement('div');
+                card.className = "card w-full h-20 md:h-24";
+                card.innerHTML = `
+                    <div class="card-inner w-full h-full relative border rounded-xl bg-gray-50 shadow-sm">
+                        <div class="card-front absolute w-full h-full flex items-center justify-center text-gray-300">?</div>
+                        <div class="card-back absolute w-full h-full flex items-center justify-center bg-indigo-100 text-3xl rounded-xl">${icon}</div>
+                    </div>
+                `;
+                card.onclick = () => flipCard(card, icon);
+                grid.appendChild(card);
+            });
+
+            clearInterval(memoryTimer);
+            memoryTimer = setInterval(() => {
+                memoryTime++;
+                document.getElementById('memory-timer').innerText = memoryTime;
+            }, 1000);
+            gameIntervals.push(memoryTimer);
+        }
+
+        function flipCard(card, icon) {
+            if (flippedCards.length < 2 && !card.classList.contains('flipped')) {
+                card.classList.add('flipped');
+                flippedCards.push({ card, icon });
+
+                if (flippedCards.length === 2) {
+                    setTimeout(() => {
+                        if (flippedCards[0].icon === flippedCards[1].icon) {
+                            memoryScore++;
+                            document.getElementById('memory-score').innerText = memoryScore;
+                            if (memoryScore === 8) endGame(Math.max(0, 100 - memoryTime));
+                        } else {
+                            flippedCards[0].card.classList.remove('flipped');
+                            flippedCards[1].card.classList.remove('flipped');
+                        }
+                        flippedCards = [];
+                    }, 800);
+                }
+            }
+        }
+
+        // --- GAME 3: SNAKE ---
+        let snake = [{x: 10, y: 10}];
+        let food = {x: 5, y: 5};
+        let dx = 1, dy = 0;
+        let snakeScore = 0;
+        const canvas = document.getElementById('snake-canvas');
+        const ctx = canvas.getContext('2d');
+        const box = 20;
+
+        function startSnake() {
+            showView('snake-view');
+            snake = [{x: 10, y: 10}];
+            dx = 1; dy = 0;
+            snakeScore = 0;
+            document.getElementById('snake-score').innerText = '0';
+            clearIntervals();
+            const loop = setInterval(drawSnake, 150);
+            gameIntervals.push(loop);
+        }
+
+        function changeDir(dir) {
+            if (dir === 'up' && dy === 0) { dx = 0; dy = -1; }
+            if (dir === 'down' && dy === 0) { dx = 0; dy = 1; }
+            if (dir === 'left' && dx === 0) { dx = -1; dy = 0; }
+            if (dir === 'right' && dx === 0) { dx = 1; dy = 0; }
+        }
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowUp') changeDir('up');
+            if (e.key === 'ArrowDown') changeDir('down');
+            if (e.key === 'ArrowLeft') changeDir('left');
+            if (e.key === 'ArrowRight') changeDir('right');
+        });
+
+        function drawSnake() {
+            const head = {x: snake[0].x + dx, y: snake[0].y + dy};
+            
+            // Collision walls or self
+            if (head.x < 0 || head.x >= 20 || head.y < 0 || head.y >= 20 || snake.some(s => s.x === head.x && s.y === head.y)) {
+                endGame(snakeScore);
+                return;
+            }
+
+            snake.unshift(head);
+
+            if (head.x === food.x && head.y === food.y) {
+                snakeScore += 10;
+                document.getElementById('snake-score').innerText = snakeScore;
+                food = {x: Math.floor(Math.random() * 20), y: Math.floor(Math.random() * 20)};
+            } else {
+                snake.pop();
+            }
+
+            ctx.clearRect(0, 0, 400, 400);
+            ctx.fillStyle = "#ff4d4d";
+            ctx.fillRect(food.x * box, food.y * box, box, box);
+            
+            ctx.fillStyle = "#4ade80";
+            snake.forEach((p, i) => {
+                ctx.fillStyle = i === 0 ? "#22c55e" : "#4ade80";
+                ctx.fillRect(p.x * box, p.y * box, box - 2, box - 2);
+            });
+        }
+
+        // --- GAME 4: WHACK A MOLE ---
+        let moleScore = 0;
+        let moleTimer;
+        let moleActiveTime = 30;
+
+        function startMole() {
+            showView('mole-view');
+            moleScore = 0;
+            moleActiveTime = 30;
+            document.getElementById('mole-score').innerText = '0';
+            document.getElementById('mole-timer').innerText = moleActiveTime;
+            
+            const holes = document.querySelectorAll('.mole');
+            holes.forEach(m => {
+                m.onclick = () => {
+                    if (m.classList.contains('up')) {
+                        moleScore += 10;
+                        document.getElementById('mole-score').innerText = moleScore;
+                        m.classList.remove('up');
+                    }
+                };
+            });
+
+            clearIntervals();
+            const gameLoop = setInterval(() => {
+                moleActiveTime--;
+                document.getElementById('mole-timer').innerText = moleActiveTime;
+                if (moleActiveTime <= 0) endGame(moleScore);
+            }, 1000);
+
+            const moleLoop = setInterval(() => {
+                const randomHole = Math.floor(Math.random() * holes.length);
+                holes[randomHole].classList.add('up');
+                setTimeout(() => holes[randomHole].classList.remove('up'), 800);
+            }, 1000);
+
+            gameIntervals.push(gameLoop, moleLoop);
+        }
+
+        function endGame(score) {
+            clearIntervals();
+            showView('game-over');
+            document.getElementById('final-score').innerText = score;
+        }
+
+    </script>
+</body>
+</html>
             <!-- 4. Harga / Paket (Existing) -->
             <!-- ... section harga ... -->
             <section id="harga" class="py-16 md:py-24 bg-gray-50">
